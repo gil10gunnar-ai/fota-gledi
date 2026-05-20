@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dult Búi - Random Joke Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #667eea;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      animation: bounce 1s ease-in-out;
+    }
+
+    .subtitle {
+      color: #999;
+      font-size: 1.1em;
+      margin-bottom: 40px;
+    }
+
+    .joke-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.3em;
+      line-height: 1.6;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .joke-setup {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .joke-punchline {
+      font-style: italic;
+      opacity: 0.95;
+    }
+
+    .loading {
+      color: #667eea;
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .btn-next:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-next:active {
+      transform: translateY(0);
+    }
+
+    .btn-copy {
+      background: #f0f0f0;
+      color: #333;
+      padding: 12px 20px;
+    }
+
+    .btn-copy:hover {
+      background: #e0e0e0;
+    }
+
+    .category-select {
+      margin-bottom: 30px;
+    }
+
+    select {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      cursor: pointer;
+      background: white;
+      color: #333;
+    }
+
+    .stats {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      color: #666;
+    }
+
+    .copy-message {
+      display: none;
+      color: #4caf50;
+      font-weight: bold;
+      margin-top: 10px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .copy-message.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .error {
+      color: #f44336;
+      font-weight: bold;
+      padding: 15px;
+      background: #ffebee;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .joke-box {
+        padding: 25px;
+        font-size: 1.1em;
+        min-height: 150px;
+      }
+
+      button {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .btn-next {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>😂 Dult Búi</h1>
+    <p class="subtitle">Fáðu handahófskennt dult!</p>
+
+    <div class="category-select">
+      <label for="category">Veldu flokk:</label>
+      <select id="category">
+        <option value="any">Allt dult</option>
+        <option value="general">Almennt</option>
+        <option value="programming">Forritun</option>
+        <option value="knock-knock">Knock-knock</option>
+      </select>
+    </div>
+
+    <div class="joke-box" id="jokeBox">
+      <div class="loading">Sæki dult...</div>
+    </div>
+
+    <div class="copy-message" id="copyMessage">✓ Dult afritað!</div>
+
+    <div class="button-group">
+      <button class="btn-next" onclick="getJoke()">Næsta Dult 🎉</button>
+      <button class="btn-copy" onclick="copyJoke()">Afrita 📋</button>
+    </div>
+
+    <div class="stats">
+      <p>Dult sótt: <strong id="jokeCount">0</strong></p>
+    </div>
+  </div>
+
+  <script>
+    let currentJoke = null;
+    let jokeCount = 0;
+
+    // Fá dult þegar síðan hleðst
+    window.addEventListener('load', function() {
+      getJoke();
+    });
+
+    // Fá dult
+    async function getJoke() {
+      const category = document.getElementById('category').value;
+      const jokeBox = document.getElementById('jokeBox');
+      
+      // Sýna loading
+      jokeBox.innerHTML = '<div class="loading">Sæki dult...</div>';
+
+      try {
+        // Nota JokeAPI - https://jokeapi.dev
+        const url = category === 'any' 
+          ? 'https://v2.jokeapi.dev/joke/Any?type=twopart,single'
+          : `https://v2.jokeapi.dev/joke/${category}?type=twopart,single`;
+
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error('Ekki tókst að sækja dult');
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          jokeBox.innerHTML = '<div class="error">Endalaust dult fundið fyrir þann flokk</div>';
+          return;
+        }
+
+        // Geyma dult
+        currentJoke = data;
+        jokeCount++;
+        document.getElementById('jokeCount').textContent = jokeCount;
+
+        // Birta dult
+        displayJoke(data);
+
+      } catch (error) {
+        jokeBox.innerHTML = `<div class="error">Misbrestur: ${error.message}</div>`;
+        console.error('Misbrestur:', error);
+      }
+    }
+
+    // Birta dult
+    function displayJoke(data) {
+      const jokeBox = document.getElementById('jokeBox');
+      
+      let jokeHTML;
+      if (data.type === 'twopart') {
+        jokeHTML = `
+          <div class="joke-setup">${data.setup}</div>
+          <div class="joke-punchline">${data.delivery}</div>
+        `;
+      } else {
+        jokeHTML = `
+          <div class="joke-punchline">${data.joke}</div>
+        `;
+      }
+
+      jokeBox.innerHTML = jokeHTML;
+    }
+
+    // Afrita dult
+    function copyJoke() {
+      if (!currentJoke) return;
+
+      let jokeText;
+      if (currentJoke.type === 'twopart') {
+        jokeText = `${currentJoke.setup}\n\n${currentJoke.delivery}`;
+      } else {
+        jokeText = currentJoke.joke;
+      }
+
+      navigator.clipboard.writeText(jokeText).then(() => {
+        const copyMsg = document.getElementById('copyMessage');
+        copyMsg.classList.add('active');
+        setTimeout(() => {
+          copyMsg.classList.remove('active');
+        }, 2000);
+      });
+    }
+
+    // Halda sér með Enter
+    document.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        getJoke();
+      }
+    });
+  </script>
+</body>
+</html>
