@@ -890,3 +890,671 @@
 <img src="images/fotagledi.png" alt="Fótagleði" />
 <img src="images/strumpa.png" alt="Strípu Strumpa" />
 <img src="images/sokka.png" alt="Sokka" />
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fóta Gleði - Sokkar og Inniskór</title>
+  <style>
+    /* ... (allur stíll frá þínu síðasta lagi) ... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #FFB6C1 0%, #FFE4E1 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-content {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    .header-text h1 {
+      font-size: 2.5em;
+      color: #D63384;
+      margin-bottom: 5px;
+    }
+
+    .tagline {
+      color: #666;
+      font-size: 1.1em;
+    }
+
+    /* Shopping Cart */
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 2em;
+      color: #D63384;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #ff6b9d;
+      color: white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: none;
+      border: 2px solid #FFB6C1;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      color: #D63384;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: #D63384;
+      color: white;
+      border-color: #D63384;
+    }
+
+    /* Main Content */
+    .content {
+      display: none;
+    }
+
+    .content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      background: #f0f0f0;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-name {
+      font-size: 1.3em;
+      color: #333;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .product-description {
+      color: #666;
+      font-size: 0.95em;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .product-price {
+      font-size: 1.5em;
+      color: #D63384;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .product-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-details,
+    .btn-add-cart {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    .btn-details {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-details:hover {
+      background: #e0e0e0;
+    }
+
+    .btn-add-cart {
+      background: #D63384;
+      color: white;
+    }
+
+    .btn-add-cart:hover {
+      background: #B82E7F;
+    }
+
+    /* Modal for Product Details */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 2em;
+      cursor: pointer;
+      color: #999;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .close-modal:hover {
+      color: #333;
+    }
+
+    .modal-image {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal-details {
+      color: #333;
+    }
+
+    .modal-details h2 {
+      color: #D63384;
+      margin-bottom: 15px;
+      font-size: 2em;
+    }
+
+    .modal-details p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .modal-price {
+      font-size: 1.8em;
+      color: #D63384;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    /* Cart */
+    .cart-items {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #D63384;
+      font-weight: 700;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 20px;
+    }
+
+    .quantity-btn {
+      background: #FFB6C1;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #D63384;
+    }
+
+    .remove-btn {
+      background: #ff6b9d;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .remove-btn:hover {
+      background: #ff5a8a;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+      font-size: 1.1em;
+    }
+
+    .cart-summary {
+      background: #fff3f8;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .cart-total {
+      font-size: 1.5em;
+      color: #D63384;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 15px;
+      background: #D63384;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-checkout:hover {
+      background: #B82E7F;
+    }
+
+    /* Contact Form */
+    .form-container {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #FFB6C1;
+      border-radius: 8px;
+      font-size: 1em;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #D63384;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: #D63384;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: #B82E7F;
+    }
+
+    .success-message {
+      display: none;
+      background: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .success-message.active {
+      display: block;
+    }
+
+    /* Location */
+    .location-info {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .location-info h2 {
+      color: #D63384;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .location-info p {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .opening-hours {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .opening-hours h3 {
+      color: #D63384;
+      margin-bottom: 15px;
+    }
+
+    .hour-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      color: #666;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header-text h1 {
+        font-size: 1.8em;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        width: 95%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-content">
+        <img src="logo.png" alt="Fóta Gleði Logo" class="logo" />
+        <div class="header-text">
+          <h1>Fóta Gleði</h1>
+          <p class="tagline">Sokkar og Inniskór fyrir alla!</p>
+        </div>
+      </div>
+      <div class="cart-icon" onclick="toggleSection('cart')">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </header>
+
+    <!-- Núningur -->
+    <nav>
+      <button class="nav-btn active" onclick="showSection('products')">Vörur</button>
+      <button class="nav-btn" onclick="showSection('cart')">Karfan</button>
+      <button class="nav-btn" onclick="showSection('contact')">Hafa Samband</button>
+      <button class="nav-btn" onclick="showSection('location')">Staðsetning</button>
+    </nav>
+
+    <!-- Myndir í vörulistan (þú getur breytt staðsetningu eftir vilja) -->
+    <!-- Hér bætir þú við myndum þar sem þú vilt að þær birtist -->
+    <div style="text-align:center; margin-bottom:20px;">
+      <img src="images/fotapari.png" alt="Fótapari" style="max-width:150px; margin:10px;">
+      <img src="images/fotagledi.png" alt="Fótagleði" style="max-width:150px; margin:10px;">
+      <img src="images/strumpa.png" alt="Strípu Strumpa" style="max-width:150px; margin:10px;">
+      <img src="images/sokka.png" alt="Sokka" style="max-width:150px; margin:10px;">
+    </div>
+
+    <!-- Vörur -->
+    <div id="products" class="content active">
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <!-- Körfu -->
+    <div id="cart" class="content">
+      <div class="cart-items" id="cartContainer">
+        <div class="cart-empty">Karfan þín er tóm</div>
+      </div>
+    </div>
+
+    <!-- Hafa samband -->
+    <div id="contact" class="content">
+      <div class="form-container">
+        <div class="success-message" id="successMessage">
+          Takk! Við höfum móttekið skilaboðin þín. Við munum svara sem fyrst.
+        </div>
+        <h2 style="color: #D63384; margin-bottom: 25px;">Hafa Samband</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Nafn *</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Tölvupóstur *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Sími</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Skilaboð *</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Senda</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Staðsetning -->
+    <div id="location" class="content">
+      <div class="location-info">
+        <h2>📍 Heimsæktu okkur</h2>
+        <p><strong>Glerágata 8, Akureyri</strong></p>
+        <p>📞 Sími: 460 1234</p>
+        <p>📧 Tölvupóstur: info@fotagledi.is</p>
+
+        <div class="opening-hours">
+          <h3>Opnunartímar</h3>
+          <div class="hour-item">
+            <span>Mánudagur - Föstudagur:</span>
+            <span>10:00 - 18:00</span>
+          </div>
+          <div class="hour-item">
+            <span>Laugardagur:</span>
+            <span>11:00 - 17:00</span>
+          </div>
+          <div class="hour-item">
+            <span>Sunnudagur:</span>
+            <span>Lokað</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // ... (allur JavaScript frá þínu síðasta lagi, ekkert breytt) ...
+    // Vinsamlegast límdu inn JavaScript kóðann hér ef þú vilt endurskoða hann.
+    // (Ég hef ekki endurskoðað hann hér, þar sem þú sendir hann í síðasta skilaboði.)
+  </script>
+</body>
+</html>
