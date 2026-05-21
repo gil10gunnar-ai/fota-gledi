@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
-    :root { --pink: #D63384; --lightpink: #FFB6C1; }
+    :root { --pink: #D63384; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: system-ui, sans-serif;
@@ -50,7 +50,7 @@
     }
     nav button {
       padding: 14px 28px;
-      border: 2px solid var(--lightpink);
+      border: 2px solid #FFB6C1;
       background: white;
       color: var(--pink);
       border-radius: 50px;
@@ -78,7 +78,6 @@
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       transition: all 0.5s;
-      cursor: pointer;
     }
     .product-card:hover { transform: translateY(-15px); box-shadow: 0 25px 50px rgba(214,51,132,0.25); }
     .product-image { width: 100%; height: 320px; object-fit: cover; }
@@ -90,13 +89,6 @@
     .btn-add {
       width: 100%; padding: 16px; background: var(--pink); color: white;
       border: none; border-radius: 50px; margin-top: 12px; cursor: pointer;
-    }
-
-    .location-img {
-      max-width: 100%;
-      border-radius: 20px;
-      margin: 25px 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -122,44 +114,33 @@
       <button onclick="showSection('location')">Staðsetning</button>
     </nav>
 
-    <!-- Vörur -->
     <div id="products" class="section active">
       <div class="products-grid" id="product-grid"></div>
     </div>
 
-    <!-- Um Okkur -->
-    <div id="about" class="section">
-      <div style="background:white; padding:60px; border-radius:24px; box-shadow:0 10px 35px rgba(0,0,0,0.1); max-width:900px; margin:40px auto; text-align:center;">
-        <h2 style="color:var(--pink);">Um Okkur</h2>
-        <p style="font-size:1.2rem; margin-top:20px;">Við erum í 10. bekk og ákváðum að byrja okkar eigið fyrirtæki.</p>
-      </div>
+    <div id="about" class="section" style="display:none; text-align:center; padding:60px;">
+      <h2 style="color:var(--pink);">Um Okkur</h2>
+      <p style="margin-top:20px;">Við erum í 10. bekk...</p>
     </div>
 
-    <!-- Karfa -->
-    <div id="cart" class="section">
-      <h2 style="text-align:center; margin-top:100px;">Karfan þín er tóm...</h2>
+    <div id="cart" class="section" style="display:none; text-align:center; padding:100px;">
+      <h2>Karfan þín er tóm...</h2>
     </div>
 
-    <!-- Staðsetning -->
-    <div id="location" class="section">
-      <h2 style="text-align:center; color:var(--pink); margin:40px 0 20px;">📍 Staðsetning okkar</h2>
-      <p style="text-align:center; font-size:1.3rem;"><strong>Glerágata 8, Akureyri</strong></p>
-      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Staðsetning" class="location-img">
+    <div id="location" class="section" style="display:none; text-align:center; padding:40px;">
+      <h2 style="color:var(--pink);">📍 Staðsetning</h2>
+      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" style="max-width:800px; border-radius:20px; margin-top:20px;">
     </div>
 
-    <!-- Hafa Samband -->
-    <div id="contact" class="section">
-      <h2 style="text-align:center; margin-top:100px;">Hafa Samband</h2>
-    </div>
   </div>
 
   <script>
     const products = [
-      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar sem láta þig skrika af gleði" },
-      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Sokkar fyrir tónlistarunnendur" },
+      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
+      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
       { name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
-      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Næringarríkt fótakrem" },
-      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór hagkvæmur pakki" }
+      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
+      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
     ];
 
     function renderProducts() {
@@ -175,7 +156,7 @@
             <h3 class="product-name">${p.name}</h3>
             <p>${p.desc}</p>
             <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
-            <button class="btn-add" onclick="addToCart('${p.name}'); event.stopImmediatePropagation();">Bæta í körfu</button>
+            <button class="btn-add" onclick="addToCart('${p.name}')">Bæta í körfu</button>
           </div>
         `;
         grid.appendChild(card);
@@ -183,10 +164,11 @@
     }
 
     let cartCount = 0;
+
     function addToCart(name) {
       cartCount++;
       document.getElementById("cart-count").textContent = cartCount;
-      alert(`✅ ${name} bætt í körfu!`);
+      alert(`✅ ${name} hefur verið bætt í körfu! 🛒`);
     }
 
     function showSection(id) {
