@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fóta Gleði - Sokkar & Inniskór</title>
+  <title>Fóta Gleði</title>
   <style>
     :root {
       --pink: #d63384;
-      --bg1: #ffe4e9;
-      --bg2: #ffd1e0;
-      --card: #ffffff;
-      --text: #2e2e2e;
-      --shadow: 0 14px 35px rgba(0,0,0,0.12);
+      --bg: #ffd9e5;
+      --card: white;
+      --shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      color: var(--text);
-      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe4eb, #ffd1e0);
+      color: #222;
     }
 
     .container {
@@ -31,13 +32,13 @@
 
     header {
       background: var(--card);
-      border-radius: 26px;
+      border-radius: 24px;
       box-shadow: var(--shadow);
-      padding: 22px 28px;
+      padding: 20px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
       margin-bottom: 18px;
     }
@@ -45,32 +46,31 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     .logo {
-      width: 96px;
-      height: 96px;
+      width: 90px;
+      height: 90px;
       object-fit: cover;
-      border-radius: 18px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+      border-radius: 16px;
       background: #f4f4f4;
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-size: 2.8rem;
       color: var(--pink);
       line-height: 1;
-      margin-bottom: 6px;
     }
 
     .subtitle {
-      font-size: 1.1rem;
+      margin-top: 6px;
+      font-size: 1.05rem;
     }
 
-    .cart-icon {
-      font-size: 2.6rem;
+    .cart-btn {
+      font-size: 2.3rem;
       cursor: pointer;
       position: relative;
       user-select: none;
@@ -80,27 +80,27 @@
       position: absolute;
       top: -8px;
       right: -10px;
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: var(--pink);
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .9rem;
+      font-size: 0.85rem;
       font-weight: 800;
     }
 
     nav {
       background: var(--card);
-      border-radius: 22px;
+      border-radius: 18px;
       box-shadow: var(--shadow);
       padding: 14px;
       display: flex;
-      justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
+      justify-content: center;
       margin-bottom: 22px;
     }
 
@@ -108,41 +108,42 @@
       border: 2px solid #ffb6c1;
       background: white;
       color: var(--pink);
-      padding: 12px 22px;
+      padding: 12px 18px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
-      transition: .2s ease;
     }
 
-    nav button:hover,
-    nav button.active {
+    nav button.active,
+    nav button:hover {
       background: var(--pink);
       color: white;
-      transform: translateY(-2px);
     }
 
     .section { display: none; }
     .section.active { display: block; }
 
-    .hero {
-      background: white;
-      border-radius: 26px;
+    .hero, .panel {
+      background: var(--card);
+      border-radius: 24px;
       box-shadow: var(--shadow);
-      padding: 28px;
+      padding: 24px;
+    }
+
+    .hero {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
-    .hero h2 {
+    .hero h2,
+    .panel h2 {
       color: var(--pink);
-      font-size: clamp(1.5rem, 4vw, 2.3rem);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      font-size: 2rem;
     }
 
-    .hero p {
-      max-width: 850px;
-      margin: 0 auto;
+    .hero p,
+    .panel p {
       line-height: 1.7;
       font-size: 1.05rem;
     }
@@ -150,20 +151,14 @@
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      gap: 22px;
     }
 
     .product-card {
       background: white;
-      border-radius: 24px;
+      border-radius: 22px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 44px rgba(214,51,132,0.20);
     }
 
     .product-image {
@@ -175,7 +170,7 @@
     }
 
     .product-info {
-      padding: 20px;
+      padding: 18px;
       text-align: center;
     }
 
@@ -191,49 +186,26 @@
 
     .product-price {
       color: var(--pink);
-      font-size: 1.5rem;
-      font-weight: 900;
-      margin-bottom: 14px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
 
     .btn-add {
       width: 100%;
       border: none;
-      padding: 14px;
-      border-radius: 999px;
       background: var(--pink);
       color: white;
-      font-size: 1rem;
+      padding: 13px;
+      border-radius: 999px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    .panel {
-      background: white;
-      border-radius: 26px;
-      box-shadow: var(--shadow);
-      padding: 30px;
-      text-align: center;
-    }
-
-    .panel h2 {
-      color: var(--pink);
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-
-    .about-text {
-      max-width: 850px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
     .cart-items {
       display: grid;
-      gap: 16px;
+      gap: 14px;
       margin-top: 20px;
-      text-align: left;
     }
 
     .cart-item {
@@ -250,10 +222,12 @@
       height: 84px;
       object-fit: cover;
       border-radius: 14px;
-      flex-shrink: 0;
     }
 
-    .cart-item-info { flex: 1; }
+    .cart-item-info {
+      flex: 1;
+      text-align: left;
+    }
 
     .remove-btn {
       border: none;
@@ -261,28 +235,30 @@
       color: white;
       padding: 10px 14px;
       border-radius: 999px;
-      font-weight: 800;
       cursor: pointer;
+      font-weight: 700;
     }
 
     .total {
-      margin-top: 22px;
-      font-size: 1.35rem;
-      font-weight: 900;
+      margin-top: 18px;
       color: var(--pink);
+      font-size: 1.3rem;
+      font-weight: 900;
     }
 
     .location-img {
-      max-width: 100%;
-      border-radius: 22px;
+      width: 100%;
+      max-width: 850px;
+      border-radius: 18px;
       margin-top: 18px;
       box-shadow: var(--shadow);
     }
 
     @media (max-width: 700px) {
-      .logo { width: 78px; height: 78px; }
-      .cart-item { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: 2rem; }
+      .logo { width: 74px; height: 74px; }
       .product-image { height: 250px; }
+      .cart-item { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -296,21 +272,20 @@
           <p class="subtitle">Sokkar og Inniskór fyrir alla!</p>
         </div>
       </div>
-      <div class="cart-icon" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
+      <div class="cart-btn" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
     </header>
 
     <nav>
       <button class="active" onclick="showSection('products')">Vörur</button>
       <button onclick="showSection('about')">Um Okkur</button>
       <button onclick="showSection('cart')">Karfan</button>
-      <button onclick="showSection('contact')">Hafa Samband</button>
       <button onclick="showSection('location')">Staðsetning</button>
     </nav>
 
     <div id="products" class="section active">
       <div class="hero">
         <h2>Velkomin í Fóta Gleði</h2>
-        <p>Við seljum skemmtilega sokka og mjúka inniskó. Markmiðið okkar er að búa til vörur sem eru bæði flottar og þægilegar.</p>
+        <p>Skemmtilegir sokkar, mjúkir inniskór og vörur sem gera daginn betri.</p>
       </div>
       <div class="products-grid" id="product-grid"></div>
     </div>
@@ -318,7 +293,7 @@
     <div id="about" class="section">
       <div class="panel">
         <h2>Um Okkur</h2>
-        <p class="about-text">Við erum nokkrir nemendur úr 10 bekk Giljaskóla og við ákváðum að byrja sokka fyrirtæki.</p>
+        <p>Við erum nokkrir nemendur úr 10 bekk Giljaskóla og við ákváðum að byrja sokka fyrirtæki.</p>
       </div>
     </div>
 
@@ -327,13 +302,6 @@
         <h2>Karfan þín</h2>
         <div id="cart-items" class="cart-items"></div>
         <div id="cart-total" class="total">Samtals: 0 kr.</div>
-      </div>
-    </div>
-
-    <div id="contact" class="section">
-      <div class="panel">
-        <h2>Hafa Samband</h2>
-        <p>Settu inn símanúmer, netfang eða Instagram hér.</p>
       </div>
     </div>
 
@@ -363,7 +331,6 @@
     function renderProducts() {
       const grid = document.getElementById("product-grid");
       grid.innerHTML = "";
-
       products.forEach(p => {
         const card = document.createElement("div");
         card.className = "product-card";
@@ -382,7 +349,6 @@
 
     function addToCart(id) {
       const product = products.find(p => p.id === id);
-      if (!product) return;
       cart.push(product);
       saveCart();
       updateCartCount();
@@ -406,7 +372,7 @@
       const cartTotal = document.getElementById("cart-total");
 
       if (cart.length === 0) {
-        cartItems.innerHTML = "<p style='text-align:center; width:100%;'>Karfan er tóm.</p>";
+        cartItems.innerHTML = "<p>Karfan er tóm.</p>";
         cartTotal.textContent = "Samtals: 0 kr.";
         return;
       }
@@ -433,7 +399,7 @@
     function showSection(id) {
       document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
       document.getElementById(id).classList.add("active");
-      document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
     }
 
     window.onload = function() {
