@@ -1,101 +1,497 @@
-<script>
-  const products = [
-    { id: 1, name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
-    { id: 2, name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
-    { id: 3, name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
-    { id: 4, name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
-    { id: 5, name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
-  ];
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  function renderProducts() {
-    const grid = document.getElementById("product-grid");
-    grid.innerHTML = "";
-
-    products.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.innerHTML = `
-        <img src="${p.img}" class="product-image" alt="${p.name}">
-        <div class="product-info">
-          <h3 class="product-name">${p.name}</h3>
-          <p>${p.desc}</p>
-          <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
-          <button class="btn-add" onclick="addToCart(${p.id})">Bæta í körfu</button>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    if (!product) return;
-
-    cart.push(product);
-    saveCart();
-    updateCartCount();
-    renderCart();
-    alert(`✅ ${product.name} hefur verið bætt í körfu! 🛒`);
-  }
-
-  function updateCartCount() {
-    document.getElementById("cart-count").textContent = cart.length;
-  }
-
-  function renderCart() {
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-
-    if (!cartItems) return;
-
-    if (cart.length === 0) {
-      cartItems.innerHTML = "<p style='text-align:center;'>Karfan er tóm.</p>";
-      cartTotal.textContent = "Samtals: 0 kr.";
-      return;
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fóta Gleði - Sokkar & Inniskór</title>
+  <style>
+    :root {
+      --pink: #d63384;
+      --light-pink: #ffe4e9;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
     }
 
-    let total = 0;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    cartItems.innerHTML = cart.map((item, index) => {
-      total += item.price;
-      return `
-        <div style="background:white; padding:20px; border-radius:20px; display:flex; gap:20px; align-items:center; box-shadow:0 8px 20px rgba(0,0,0,0.08);">
-          <img src="${item.img}" alt="${item.name}" style="width:100px; height:100px; object-fit:cover; border-radius:16px;">
-          <div style="flex:1; text-align:left;">
-            <h3>${item.name}</h3>
-            <p>${item.desc}</p>
-            <p style="color:var(--pink); font-weight:bold;">${item.price.toLocaleString('is-IS')} kr.</p>
-          </div>
-          <button onclick="removeFromCart(${index})" style="padding:10px 16px; border:none; border-radius:999px; background:#ff5c8a; color:white; cursor:pointer;">Eyða</button>
+    body {
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1450px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: white;
+      border-radius: 24px;
+      padding: 25px 35px;
+      margin: 10px 0 25px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 110px;
+      width: 110px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: var(--pink);
+      line-height: 1;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-top: 8px;
+    }
+
+    .cart-icon {
+      font-size: 2.8rem;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--pink);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    nav {
+      background: white;
+      padding: 18px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 35px;
+    }
+
+    nav button {
+      padding: 14px 26px;
+      border: 2px solid #ffb6c1;
+      background: white;
+      color: var(--pink);
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    nav button.active,
+    nav button:hover {
+      background: var(--pink);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      color: var(--pink);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(214, 51, 132, 0.2);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      background: #f6f6f6;
+    }
+
+    .product-info {
+      padding: 22px;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 1.35rem;
+      margin: 8px 0;
+      font-weight: 700;
+    }
+
+    .product-desc {
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 1.6rem;
+      color: var(--pink);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .btn-add {
+      width: 100%;
+      padding: 14px;
+      background: var(--pink);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .btn-add:hover {
+      filter: brightness(0.95);
+    }
+
+    .about-box,
+    .cart-box,
+    .contact-box,
+    .location-box {
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 35px;
+      text-align: center;
+    }
+
+    .about-box h2,
+    .cart-box h2,
+    .contact-box h2,
+    .location-box h2 {
+      color: var(--pink);
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .cart-items {
+      display: grid;
+      gap: 18px;
+      margin-top: 25px;
+      text-align: left;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background: #fff7fa;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .cart-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-info h3 {
+      margin-bottom: 6px;
+    }
+
+    .cart-item-info p {
+      margin-bottom: 4px;
+    }
+
+    .remove-btn {
+      border: none;
+      background: #ff5c8a;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .total-box {
+      margin-top: 25px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--pink);
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .logo {
+        width: 85px;
+        height: 85px;
+      }
+
+      .product-image {
+        height: 260px;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="images/Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo">
+        <div>
+          <h1>Fóta Gleði</h1>
+          <p class="subtitle">Sokkar og Inniskór fyrir alla!</p>
         </div>
-      `;
-    }).join("");
+      </div>
 
-    cartTotal.textContent = `Samtals: ${total.toLocaleString('is-IS')} kr.`;
-  }
+      <div class="cart-icon" onclick="showSection('cart')">
+        🛒 <span class="cart-count" id="cart-count">0</span>
+      </div>
+    </header>
 
-  function removeFromCart(index) {
-    cart.splice(index, 1);
-    saveCart();
-    updateCartCount();
-    renderCart();
-  }
+    <nav>
+      <button class="active" onclick="showSection('products')">Vörur</button>
+      <button onclick="showSection('about')">Um Okkur</button>
+      <button onclick="showSection('cart')">Karfan</button>
+      <button onclick="showSection('contact')">Hafa Samband</button>
+      <button onclick="showSection('location')">Staðsetning</button>
+    </nav>
 
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if (id === "cart") renderCart();
-  }
+    <div id="products" class="section active">
+      <div class="hero">
+        <h2>Velkomin í Fóta Gleði</h2>
+        <p>Hér finnur þú skemmtilega sokka, hlýja inniskó og vörur sem gera daginn aðeins skemmtilegri.</p>
+      </div>
+      <div class="products-grid" id="product-grid"></div>
+    </div>
 
-  window.onload = function() {
-    renderProducts();
-    updateCartCount();
-    renderCart();
-  };
-</script>
+    <div id="about" class="section">
+      <div class="about-box">
+        <h2>Um Okkur</h2>
+        <p>Við erum nokkrir nemendur úr 10 bekk Giljaskóla og við ákváðum að byrja sokka fyrirtæki.</p>
+      </div>
+    </div>
+
+    <div id="cart" class="section">
+      <div class="cart-box">
+        <h2>Karfan þín</h2>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="total-box" id="cart-total">Samtals: 0 kr.</div>
+      </div>
+    </div>
+
+    <div id="contact" class="section">
+      <div class="contact-box">
+        <h2>Hafa Samband</h2>
+        <p>Settu inn netfang, símanúmer eða Instagram hér ef þið viljið hafa samband.</p>
+      </div>
+    </div>
+
+    <div id="location" class="section">
+      <div class="location-box">
+        <h2>📍 Staðsetning</h2>
+        <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Staðsetning" style="max-width:100%; border-radius:20px; margin-top:20px;">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
+      { id: 2, name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
+      { id: 3, name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
+      { id: 4, name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
+      { id: 5, name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function saveCart() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("product-grid");
+      grid.innerHTML = "";
+
+      products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" class="product-image">
+          <div class="product-info">
+            <h3 class="product-name">${p.name}</h3>
+            <p class="product-desc">${p.desc}</p>
+            <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
+            <button class="btn-add" onclick="addToCart(${p.id})">Bæta í körfu</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      cart.push(product);
+      saveCart();
+      updateCartCount();
+      renderCart();
+      showSection('cart');
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartCount() {
+      document.getElementById("cart-count").textContent = cart.length;
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
+
+      if (!cartItems) return;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = "<p style='text-align:center; width:100%;'>Karfan er tóm.</p>";
+        cartTotal.textContent = "Samtals: 0 kr.";
+        return;
+      }
+
+      let total = 0;
+
+      cartItems.innerHTML = cart.map((item, index) => {
+        total += item.price;
+        return `
+          <div class="cart-item">
+            <img src="${item.img}" alt="${item.name}">
+            <div class="cart-item-info">
+              <h3>${item.name}</h3>
+              <p>${item.desc}</p>
+              <p><strong>${item.price.toLocaleString('is-IS')} kr.</strong></p>
+            </div>
+            <button class="remove-btn" onclick="removeFromCart(${index})">Eyða</button>
+          </div>
+        `;
+      }).join("");
+
+      cartTotal.textContent = `Samtals: ${total.toLocaleString('is-IS')} kr.`;
+    }
+
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+
+      document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+      const buttons = [...document.querySelectorAll("nav button")];
+      const map = {
+        products: 0,
+        about: 1,
+        cart: 2,
+        contact: 3,
+        location: 4
+      };
+      if (map[id] !== undefined) buttons[map[id]].classList.add("active");
+
+      if (id === "cart") renderCart();
+    }
+
+    window.onload = function () {
+      renderProducts();
+      updateCartCount();
+      renderCart();
+    };
+  </script>
+</body>
+</html>
