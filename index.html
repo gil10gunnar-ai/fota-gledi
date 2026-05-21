@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
-    :root { --pink: #D63384; --lightpink: #FFB6C1; }
+    :root { --pink: #D63384; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: system-ui, sans-serif;
       background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
       color: #333;
-      line-height: 1.6;
     }
     .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
 
@@ -51,7 +50,7 @@
     }
     nav button {
       padding: 14px 28px;
-      border: 2px solid var(--lightpink);
+      border: 2px solid #FFB6C1;
       background: white;
       color: var(--pink);
       border-radius: 50px;
@@ -106,7 +105,7 @@
 
     <header>
       <div style="display:flex; align-items:center; gap:20px;">
-        <img src="Screenshot 2026-05-20 11.54.56.png" alt="Fóta Gleði Logo" class="logo">
+        <img src="images/Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo">
         <div>
           <h1 style="font-size: 3.2rem; color: var(--pink);">Fóta Gleði</h1>
           <p style="font-size: 1.35rem;">Sokkar og Inniskór fyrir alla!</p>
@@ -132,7 +131,7 @@
     <div id="about" class="section">
       <div style="background:white; padding:60px; border-radius:24px; box-shadow:0 10px 35px rgba(0,0,0,0.1); max-width:900px; margin:40px auto; text-align:center;">
         <h2 style="color:var(--pink);">Um Okkur</h2>
-        <p style="font-size:1.2rem; margin-top:20px;">Við erum í 10. bekk og ákváðum að byrja okkar eigið sokka- og inniskórafyrirtæki. Alexandra, Angela, Ída, María og Gunnar.</p>
+        <p style="font-size:1.2rem; margin-top:20px;">Við erum í 10. bekk og ákváðum að byrja okkar eigið fyrirtæki.</p>
       </div>
     </div>
 
@@ -145,23 +144,22 @@
     <div id="location" class="section">
       <h2 style="text-align:center; color:var(--pink); margin:40px 0 20px;">📍 Staðsetning okkar</h2>
       <p style="text-align:center; font-size:1.3rem;"><strong>Glerágata 8, Akureyri</strong></p>
-      <img src="Screenshot 2026-05-21 9.02.07 AM.png" alt="Verslun" class="location-img">
+      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Verslun" class="location-img">
     </div>
 
     <!-- Hafa Samband -->
     <div id="contact" class="section">
       <h2 style="text-align:center; margin-top:100px;">Hafa Samband</h2>
-      <p style="text-align:center;">Við svarum sem fyrst!</p>
     </div>
   </div>
 
   <script>
     const products = [
-      { name: "Funny Scream Socks", price: 2290, img: "Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar sem láta þig skrika af gleði" },
-      { name: "Music Lovers Socks", price: 2190, img: "Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Sokkar fyrir tónlistarunnendur" },
-      { name: "Cozy Black Slippers", price: 3490, img: "Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
-      { name: "Fótakrem í Túbu", price: 4000, img: "Screenshot 2026-05-21 8.50.51 AM.png", desc: "Næringarríkt fótakrem" },
-      { name: "Fótakrem í Dós", price: 6000, img: "Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór hagkvæmur pakki" }
+      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
+      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
+      { name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
+      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
+      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
     ];
 
     function renderProducts() {
