@@ -64,7 +64,7 @@
       transform: translateY(-4px);
     }
 
-    /* Breyting á því að þessir hlutar séu alltaf sýnilegir */
+    /* Allar sections eru sýnilegar alltaf */
     .section { display: block; } 
   </style>
 </head>
@@ -83,6 +83,7 @@
     </header>
 
     <nav>
+      <!-- Takkar virka ekki lengur til að fela hluti -->
       <button class="active" onclick="showSection('products')">Vörur</button>
       <button onclick="showSection('about')">Um Okkur</button>
       <button onclick="showSection('cart')">Karfan</button>
@@ -147,9 +148,9 @@
       alert(`✅ ${name} hefur verið bætt í körfu! 🛒`);
     }
 
-    // fall til að sýna aðeins „Karfan“ ef það er nauðsynlegt
+    // Fall til að sýna „Karfann“ en aðrir hlutar eru alltaf sýnilegir
     function showSection(id) {
-      // Ekki þarf að fela neitt, því við erum búin að gera allar sections sýnilegar
+      // Ekki gera neitt þar sem allir hlutar eru alltaf sýnilegar
     }
 
     window.onload = renderProducts;
