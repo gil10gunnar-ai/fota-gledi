@@ -1,334 +1,182 @@
 <!DOCTYPE html>
 <html lang="is">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fóta Gleði</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --pink: #D63384; }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: system-ui, sans-serif;
       background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
-      color: #222;
+      color: #333;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header, nav, .panel, .product-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    }
+    .container { max-width: 1450px; margin: 0 auto; padding: 0 20px; }
+
     header {
+      background: white;
+      border-radius: 24px;
+      padding: 25px 35px;
+      margin: 25px 0 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      margin-bottom: 18px;
-      gap: 16px;
       flex-wrap: wrap;
+      gap: 20px;
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .logo {
-      width: 85px;
-      height: 85px;
-      object-fit: cover;
-      border-radius: 16px;
-      background: #f4f4f4;
-    }
-    h1 { color: #d63384; font-size: 2.6rem; line-height: 1; }
-    .subtitle { margin-top: 5px; }
-    .cart-btn {
-      font-size: 2.2rem;
-      position: relative;
-      cursor: pointer;
-      user-select: none;
-    }
+    .logo { height: 110px; border-radius: 16px; }
+
+    .cart-icon { font-size: 2.8rem; cursor: pointer; position: relative; }
     .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -10px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #d63384;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      font-weight: 800;
+      position: absolute; top: -10px; right: -10px;
+      background: var(--pink); color: white;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold;
     }
+
     nav {
-      padding: 14px;
+      background: white;
+      padding: 18px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 45px;
     }
     nav button {
-      border: 2px solid #ffb6c1;
+      padding: 14px 28px;
+      border: 2px solid #FFB6C1;
       background: white;
-      color: #d63384;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: 700;
+      color: var(--pink);
+      border-radius: 50px;
+      font-weight: 600;
       cursor: pointer;
+      transition: all 0.4s;
     }
-    nav button.active,
-    nav button:hover {
-      background: #d63384;
+    nav button.active, nav button:hover {
+      background: var(--pink);
       color: white;
+      transform: translateY(-4px);
     }
+
     .section { display: none; }
     .section.active { display: block; }
-    .hero, .panel {
-      padding: 24px;
-    }
-    .hero {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      text-align: center;
-      margin-bottom: 22px;
-    }
-    .hero h2, .panel h2 {
-      color: #d63384;
-      margin-bottom: 12px;
-      font-size: 2rem;
-    }
+
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
     }
     .product-card {
+      background: white;
+      border-radius: 24px;
       overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transition: all 0.5s;
     }
-    .product-image {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-      background: #f5f5f5;
-    }
-    .product-info {
-      padding: 18px;
-      text-align: center;
-    }
-    .product-price {
-      color: #d63384;
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin: 10px 0 12px;
-    }
-    .btn-add, .remove-btn {
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 700;
-    }
+    .product-card:hover { transform: translateY(-15px); box-shadow: 0 25px 50px rgba(214,51,132,0.25); }
+    .product-image { width: 100%; height: 320px; object-fit: cover; }
+
+    .product-info { padding: 24px; text-align: center; }
+    .product-name { font-size: 1.45rem; margin: 12px 0 6px; font-weight: 600; }
+    .product-price { font-size: 1.75rem; color: var(--pink); font-weight: 700; }
+
     .btn-add {
-      width: 100%;
-      background: #d63384;
-      color: white;
-      padding: 13px;
-    }
-    .cart-items {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
-    }
-    .cart-item {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      background: #fff7fa;
-      border-radius: 16px;
-      padding: 14px;
-    }
-    .cart-item img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-    .cart-item-info {
-      flex: 1;
-      text-align: left;
-    }
-    .remove-btn {
-      background: #ff5c8a;
-      color: white;
-      padding: 10px 14px;
-    }
-    .total {
-      margin-top: 18px;
-      color: #d63384;
-      font-size: 1.25rem;
-      font-weight: 900;
-    }
-    .panel p {
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-    .location-img {
-      width: 100%;
-      max-width: 850px;
-      border-radius: 18px;
-      margin-top: 18px;
-      display: block;
-    }
-    @media (max-width: 700px) {
-      h1 { font-size: 2rem; }
-      .logo { width: 72px; height: 72px; }
-      .product-image { height: 240px; }
-      .cart-item { flex-direction: column; align-items: flex-start; }
+      width: 100%; padding: 16px; background: var(--pink); color: white;
+      border: none; border-radius: 50px; margin-top: 12px; cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="container">
+
     <header>
-      <div class="brand">
+      <div style="display:flex; align-items:center; gap:20px;">
         <img src="images/Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo">
         <div>
-          <h1>Fóta Gleði</h1>
-          <p class="subtitle">Sokkar og Inniskór fyrir alla!</p>
+          <h1 style="font-size: 3.2rem; color: var(--pink);">Fóta Gleði</h1>
+          <p style="font-size: 1.35rem;">Sokkar og Inniskór fyrir alla!</p>
         </div>
       </div>
-      <div class="cart-btn" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
+      <div class="cart-icon" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
     </header>
 
     <nav>
       <button class="active" onclick="showSection('products')">Vörur</button>
       <button onclick="showSection('about')">Um Okkur</button>
       <button onclick="showSection('cart')">Karfan</button>
+      <button onclick="showSection('contact')">Hafa Samband</button>
       <button onclick="showSection('location')">Staðsetning</button>
     </nav>
 
     <div id="products" class="section active">
-      <div class="hero">
-        <h2>Velkomin í Fóta Gleði</h2>
-        <p>Hér eru sokkar og inniskór sem við höfum valið fyrir skemmtilegt og fallegt útlit.</p>
-      </div>
       <div class="products-grid" id="product-grid"></div>
     </div>
 
-    <div id="about" class="section">
-      <div class="panel">
-        <h2>Um Okkur</h2>
-        <p>Við erum nokkrir nemendur úr 10 bekk Giljaskóla og við ákváðum að byrja sokka fyrirtæki.</p>
-      </div>
+    <div id="about" class="section" style="display:none; text-align:center; padding:60px;">
+      <h2 style="color:var(--pink);">Um Okkur</h2>
+      <p style="margin-top:20px;">Við erum í 10. bekk...</p>
     </div>
 
-    <div id="cart" class="section">
-      <div class="panel">
-        <h2>Karfan þín</h2>
-        <div id="cart-items" class="cart-items"></div>
-        <div id="cart-total" class="total">Samtals: 0 kr.</div>
-      </div>
+    <div id="cart" class="section" style="display:none; text-align:center; padding:100px;">
+      <h2>Karfan þín er tóm...</h2>
     </div>
 
-    <div id="location" class="section">
-      <div class="panel">
-        <h2>📍 Staðsetning</h2>
-        <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Staðsetning" class="location-img">
-      </div>
+    <div id="location" class="section" style="display:none; text-align:center; padding:40px;">
+      <h2 style="color:var(--pink);">📍 Staðsetning</h2>
+      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" style="max-width:800px; border-radius:20px; margin-top:20px;">
     </div>
+
   </div>
 
   <script>
     const products = [
-      { id: 1, name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
-      { id: 2, name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
-      { id: 3, name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
-      { id: 4, name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
-      { id: 5, name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
+      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
+      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
+      { name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
+      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
+      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
     ];
-
-    let cart = [];
 
     function renderProducts() {
       const grid = document.getElementById("product-grid");
       grid.innerHTML = "";
+
       products.forEach(p => {
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}" class="product-image">
+          <img src="${p.img}" class="product-image" alt="${p.name}">
           <div class="product-info">
-            <h3>${p.name}</h3>
+            <h3 class="product-name">${p.name}</h3>
             <p>${p.desc}</p>
             <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
-            <button class="btn-add" onclick="addToCart(${p.id})">Bæta í körfu</button>
+            <button class="btn-add" onclick="addToCart('${p.name}')">Bæta í körfu</button>
           </div>
         `;
         grid.appendChild(card);
       });
     }
 
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      if (!product) return;
-      cart.push(product);
-      updateCart();
-      showSection('cart');
-    }
+    let cartCount = 0;
 
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCart();
-    }
-
-    function updateCart() {
-      document.getElementById("cart-count").textContent = cart.length;
-      const cartItems = document.getElementById("cart-items");
-      const cartTotal = document.getElementById("cart-total");
-
-      if (cart.length === 0) {
-        cartItems.innerHTML = "<p>Karfan er tóm.</p>";
-        cartTotal.textContent = "Samtals: 0 kr.";
-        return;
-      }
-
-      let total = 0;
-      cartItems.innerHTML = cart.map((item, index) => {
-        total += item.price;
-        return `
-          <div class="cart-item">
-            <img src="${item.img}" alt="${item.name}">
-            <div class="cart-item-info">
-              <h3>${item.name}</h3>
-              <p>${item.desc}</p>
-              <p><strong>${item.price.toLocaleString('is-IS')} kr.</strong></p>
-            </div>
-            <button class="remove-btn" onclick="removeFromCart(${index})">Eyða</button>
-          </div>
-        `;
-      }).join("");
-
-      cartTotal.textContent = `Samtals: ${total.toLocaleString('is-IS')} kr.`;
+    function addToCart(name) {
+      cartCount++;
+      document.getElementById("cart-count").textContent = cartCount;
+      alert(`✅ ${name} hefur verið bætt í körfu! 🛒`);
     }
 
     function showSection(id) {
-      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
 
-    window.onload = function () {
-      renderProducts();
-      updateCart();
-    };
+    window.onload = renderProducts;
   </script>
 </body>
 </html>
