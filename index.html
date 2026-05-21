@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="is">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
     :root { --pink: #D63384; }
@@ -64,32 +64,8 @@
       transform: translateY(-4px);
     }
 
-    .section { display: none; }
-    .section.active { display: block; }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 30px;
-    }
-    .product-card {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      transition: all 0.5s;
-    }
-    .product-card:hover { transform: translateY(-15px); box-shadow: 0 25px 50px rgba(214,51,132,0.25); }
-    .product-image { width: 100%; height: 320px; object-fit: cover; }
-
-    .product-info { padding: 24px; text-align: center; }
-    .product-name { font-size: 1.45rem; margin: 12px 0 6px; font-weight: 600; }
-    .product-price { font-size: 1.75rem; color: var(--pink); font-weight: 700; }
-
-    .btn-add {
-      width: 100%; padding: 16px; background: var(--pink); color: white;
-      border: none; border-radius: 50px; margin-top: 12px; cursor: pointer;
-    }
+    /* Breyting á því að þessir hlutar séu alltaf sýnilegir */
+    .section { display: block; } 
   </style>
 </head>
 <body>
@@ -97,7 +73,7 @@
 
     <header>
       <div style="display:flex; align-items:center; gap:20px;">
-        <img src="images/Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo">
+        <img src="images/Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo" />
         <div>
           <h1 style="font-size: 3.2rem; color: var(--pink);">Fóta Gleði</h1>
           <p style="font-size: 1.35rem;">Sokkar og Inniskór fyrir alla!</p>
@@ -114,20 +90,20 @@
       <button onclick="showSection('location')">Staðsetning</button>
     </nav>
 
-    <div id="products" class="section active">
+    <div id="products" class="section">
       <div class="products-grid" id="product-grid"></div>
     </div>
 
-    <div id="about" class="section" style="display:none; text-align:center; padding:60px;">
+    <div id="about" class="section" style="text-align:center; padding:60px;">
       <h2 style="color:var(--pink);">Um Okkur</h2>
       <p style="margin-top:20px;">Við erum í 10. bekk...</p>
     </div>
 
-    <div id="cart" class="section" style="display:none; text-align:center; padding:100px;">
+    <div id="cart" class="section" style="text-align:center; padding:100px;">
       <h2>Karfan þín er tóm...</h2>
     </div>
 
-    <div id="location" class="section" style="display:none; text-align:center; padding:40px;">
+    <div id="location" class="section" style="text-align:center; padding:40px;">
       <h2 style="color:var(--pink);">📍 Staðsetning</h2>
       <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" style="max-width:800px; border-radius:20px; margin-top:20px;">
     </div>
@@ -171,9 +147,9 @@
       alert(`✅ ${name} hefur verið bætt í körfu! 🛒`);
     }
 
+    // fall til að sýna aðeins „Karfan“ ef það er nauðsynlegt
     function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      // Ekki þarf að fela neitt, því við erum búin að gera allar sections sýnilegar
     }
 
     window.onload = renderProducts;
