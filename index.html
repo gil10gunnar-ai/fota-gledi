@@ -1,172 +1,153 @@
 <!DOCTYPE html>
 <html lang="is">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fóta Gleði - Sokkar & Inniskór</title>
-  <style>
-    :root { --pink: #D63384; }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
-      color: #333;
-    }
-    .container { max-width: 1450px; margin: 0 auto; padding: 0 20px; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vefsíðan mín - Fullkominn Kóði</title>
+<style>
+  /* Litur og grunnstíll */
+  :root {
+    --pink: #ff69b4;
+    --background: #f0f0f0;
+    --font-family: Arial, sans-serif;
+  }
 
-    header {
-      background: white;
-      border-radius: 24px;
-      padding: 25px 35px;
-      margin: 25px 0 40px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .logo { height: 110px; border-radius: 16px; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--background);
+    line-height: 1.6;
+  }
 
-    .cart-icon { font-size: 2.8rem; cursor: pointer; position: relative; }
-    .cart-count {
-      position: absolute; top: -10px; right: -10px;
-      background: var(--pink); color: white;
-      width: 28px; height: 28px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: bold;
-    }
+  /* Stíll fyrir allar skref */
+  .section {
+    padding: 60px 20px;
+    margin-bottom: 60px;
+  }
 
-    nav {
-      background: white;
-      padding: 18px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 45px;
-    }
-    nav button {
-      padding: 14px 28px;
-      border: 2px solid #FFB6C1;
-      background: white;
-      color: var(--pink);
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.4s;
-    }
-    nav button.active, nav button:hover {
-      background: var(--pink);
-      color: white;
-      transform: translateY(-4px);
-    }
+  /* Höfuðstíll */
+  h2 {
+    color: var(--pink);
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
 
-    /* Allar sections eru sýnilegar alltaf */
-    .section { display: block; } 
-  </style>
+  /* Línur og textar */
+  p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+  }
+
+  /* Tenglar */
+  a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Takki stíll */
+  .button {
+    padding: 12px 24px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--pink);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .button:hover {
+    background-color: #ff85c1;
+  }
+
+  /* Myndir */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 2px solid #ddd;
+  }
+
+  /* Sérstakur stíll fyrir heiti */
+  .highlight {
+    color: var(--pink);
+    font-weight: bold;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
 
-    <header>
-      <div style="display:flex; align-items:center; gap:20px;">
-        <img src="images/Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo" />
-        <div>
-          <h1 style="font-size: 3.2rem; color: var(--pink);">Fóta Gleði</h1>
-          <p style="font-size: 1.35rem;">Sokkar og Inniskór fyrir alla!</p>
-        </div>
-      </div>
-      <div class="cart-icon" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
-    </header>
-
-    <nav>
-      <!-- Takkar virka ekki lengur til að fela hluti -->
-      <button class="active" onclick="showSection('products')">Vörur</button>
-      <button onclick="showSection('about')">Um Okkur</button>
-      <button onclick="showSection('cart')">Karfan</button>
-      <button onclick="showSection('contact')">Hafa Samband</button>
-      <button onclick="showSection('location')">Staðsetning</button>
-    </nav>
-
-    <div id="products" class="section">
-      <div class="products-grid" id="product-grid"></div>
-    </div>
-
-    <div id="about" class="section" style="text-align:center; padding:60px;">
-      <h2 style="color:var(--pink);">Um Okkur</h2>
-      <p style="margin-top:20px;">Við erum í 10. bekk...</p>
-    </div>
-
-    <div id="cart" class="section" style="text-align:center; padding:100px;">
-      <h2>Karfan þín er tóm...</h2>
-    </div>
-
-    <div id="location" class="section" style="text-align:center; padding:40px;">
-      <h2 style="color:var(--pink);">📍 Staðsetning</h2>
-      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" style="max-width:800px; border-radius:20px; margin-top:20px;">
-    </div>
-
-  </div>
-
-  <script>
-    const products = [
-      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
-      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
-      { name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
-      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
-      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
-    ];
-
-    function renderProducts() {
-      const grid = document.getElementById("product-grid");
-      grid.innerHTML = "";
-
-      products.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${p.img}" class="product-image" alt="${p.name}">
-          <div class="product-info">
-            <h3 class="product-name">${p.name}</h3>
-            <p>${p.desc}</p>
-            <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
-            <button class="btn-add" onclick="addToCart('${p.name}')">Bæta í körfu</button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    let cartCount = 0;
-
-    function addToCart(name) {
-      cartCount++;
-      document.getElementById("cart-count").textContent = cartCount;
-      alert(`✅ ${name} hefur verið bætt í körfu! 🛒`);
-    }
-
-    // Fall til að sýna „Karfann“ en aðrir hlutar eru alltaf sýnilegir
-    function showSection(id) {
-      // Ekki gera neitt þar sem allir hlutar eru alltaf sýnilegar
-    }
-
-    window.onload = renderProducts;
-  </script>
-  <div id="about" class="section" style="text-align:center; padding:60px;">
-  <h2 style="color:var(--pink);">Um Okkur</h2>
-  <p style="margin-top:20px;">Við erum í 10. bekk...</p>
+<!-- Kafli 1: Um Okkur -->
+<div id="about" class="section" style="text-align:center;">
+  <h2>Um Okkur</h2>
+  <p>Við erum í 10. bekk og höfum áhuga á að kynna verkefni okkar á þessari vefsíðu. Þetta er okkar fyrsta vefsíða og við erum stolt af því að vera hluti af skólakenningunni. Við viljum deila okkar verkefnum og áhugamálum með öllum.</p>
+  <p>Í þessum kafla munum við segja frá okkur, okkar markmiðum, og hvað við höfum lært í ferlinu að skapa þessa síðu. Við vonum að þú njótir þess að skoða það sem við erum að bjóða upp á.</p>
 </div>
 
-<div id="location" class="section" style="text-align:center; padding:40px;">
-  <h2 style="color:var(--pink);">📍 Staðsetning</h2>
-  <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" style="max-width:800px; border-radius:20px; margin-top:20px;">
+<!-- Kafli 2: Staðsetning með mynd -->
+<div id="location" class="section" style="text-align:center;">
+  <h2>📍 Staðsetning</h2>
+  <p>Við búum í fallegu landi, Ísland, og hér er kort af staðsetningu okkar:</p>
+  <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Kort af staðsetningu" />
+  <p>Ef þú vilt koma í heimsókn, vinsamlegast hafðu samband í gegnum netfangið okkar.</p>
 </div>
 
-<div id="cart" class="section" style="text-align:center; padding:100px;">
+<!-- Kafli 3: Karfa -->
+<div id="cart" class="section" style="text-align:center;">
   <h2>Karfan þín er tóm...</h2>
+  <p>Þú hefur ekki bætt neinu við körfuna ennþá. Vinsamlegast skoðaðu vörur okkar og bættu við í körfuna þína.</p>
+  <button class="button" onclick="alert('Karfan er enn tóm!')">Skoða vörur</button>
 </div>
+
+<!-- Kafli 4: Hafa samband -->
+<div id="contact" class="section" style="text-align:center;">
+  <h2>Hafa samband</h2>
+  <p>Ef þú hefur spurningar eða vilt koma á framfæri, endilega hafðu samband við okkur:</p>
+  <ul style="list-style:none; padding:0;">
+    <li>Netfang: <a href="mailto:gil10angela@giljaskoli.is">gil10angela@giljaskoli.is</a></li>
+    <li>Símanúmer: 555-1234</li>
+    <li>Heimilisfang: Alþingi 1, Reykjavík</li>
+  </ul>
+</div>
+
+<!-- Kafli 5: Skráning með Gmail -->
+<div id="signup" class="section" style="text-align:center;">
+  <h2>Fáðu afslátt</h2>
+  <p>Skráðu þig með Gmail til að fá sérstakan afslátt og tilboð:</p>
+  <button class="button" onclick="signInWithGmail()">Skrá mig með Gmail</button>
+  <p style="margin-top:20px;">Við munum aldrei deila persónuupplýsingum þínum án samþykkis.</p>
+</div>
+
+<!-- Kafli 6: Fleiri upplýsingar og félagsleg tengsl -->
+<div id="additional-info" class="section" style="text-align:center;">
+  <h2>Fleiri upplýsingar</h2>
+  <p>Við stefnum að því að bæta við fleiri efni í framtíðinni, svo sem myndböndum, verkefnaviðbótum og fleiri gagnlegum upplýsingum.</p>
+  <p>Fylgdu okkur á samfélagsmiðlum:</p>
+  <ul style="list-style:none; padding:0;">
+    <li><a href="#">Facebook</a></li>
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Twitter</a></li>
+  </ul>
+</div>
+
+<!-- Kafli 7: Fótur -->
+<div id="footer" class="section" style="text-align:center; background-color:#222; color:#fff; padding:40px;">
+  <p>&copy; 2024 Vefsíðan mín. Allur réttur áskilinn.</p>
+  <p>Hafðu samband: <a href="mailto:gil10angela@giljaskoli.is" style="color:#fff;">gil10angela@giljaskoli.is</a></p>
+</div>
+
+<!-- JavaScript til að bæta virkni -->
+<script>
+  function signInWithGmail() {
+    alert("Þetta er einfalt dæmi. Alvöru skráning krefst Google OAuth API.");
+  }
+</script>
+
 </body>
 </html>
