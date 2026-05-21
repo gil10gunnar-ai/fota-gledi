@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Vefsíðan mín - Fullkominn Kóði</title>
+<title>Vefsíðan mín - Vörur og Upplýsingar</title>
 <style>
-  /* Litur og grunnstíll */
   :root {
     --pink: #ff69b4;
     --background: #f0f0f0;
@@ -20,27 +19,24 @@
     line-height: 1.6;
   }
 
-  /* Stíll fyrir allar skref */
+  /* Almennt stíl */
   .section {
     padding: 60px 20px;
     margin-bottom: 60px;
   }
 
-  /* Höfuðstíll */
   h2 {
     color: var(--pink);
     font-size: 2em;
     margin-bottom: 20px;
   }
 
-  /* Línur og textar */
   p {
     font-size: 1.2em;
     max-width: 800px;
     margin: 0 auto 20px auto;
   }
 
-  /* Tenglar */
   a {
     color: #0066cc;
     text-decoration: none;
@@ -74,75 +70,121 @@
     border: 2px solid #ddd;
   }
 
-  /* Sérstakur stíll fyrir heiti */
+  /* Sérstakur stíll */
   .highlight {
     color: var(--pink);
     font-weight: bold;
+  }
+
+  /* Vörulisti */
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .product {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: calc(25% - 40px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  @media(max-width: 1024px) {
+    .product {
+      width: calc(50% - 40px);
+    }
+  }
+
+  @media(max-width: 600px) {
+    .product {
+      width: 100%;
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- Kafli 1: Um Okkur -->
+<!-- Kafli 1: Vörur -->
+<div id="products" class="section" style="text-align:center;">
+  <h2>Vörur okkar</h2>
+  <div class="product-list">
+    <div class="product">
+      <h3>Vara 1</h3>
+      <img src="images/product1.png" alt="Vara 1 mynd" />
+      <p>Þessi vara er frábær og gagnleg fyrir þig.</p>
+      <button class="button" onclick="alert('Bætti við vörunni!')">Bæta við körfu</button>
+    </div>
+    <div class="product">
+      <h3>Vara 2</h3>
+      <img src="images/product2.png" alt="Vara 2 mynd" />
+      <p>Falleg vara sem allir vilja eiga.</p>
+      <button class="button" onclick="alert('Bætti við vörunni!')">Bæta við körfu</button>
+    </div>
+    <div class="product">
+      <h3>Vara 3</h3>
+      <img src="images/product3.png" alt="Vara 3 mynd" />
+      <p>Ómissandi hlutur í hversdagslífinu.</p>
+      <button class="button" onclick="alert('Bætti við vörunni!')">Bæta við körfu</button>
+    </div>
+    <div class="product">
+      <h3>Vara 4</h3>
+      <img src="images/product4.png" alt="Vara 4 mynd" />
+      <p>Gæði sem þú getur treyst á.</p>
+      <button class="button" onclick="alert('Bætti við vörunni!')">Bæta við körfu</button>
+    </div>
+  </div>
+</div>
+
+<!-- Kafli 2: Upplýsingar og tenglar -->
+<div id="info" class="section" style="text-align:center;">
+  <h2>Um okkur og tenglar</h2>
+  <p>Við erum í 10. bekk og höfum áhuga á að deila verkefnum okkar. Ef þú vilt hafa samband við okkur eða skoða frekar, þá getur þú smellt á eftirfarandi tengla:</p>
+  <ul style="list-style:none; padding:0;">
+    <li><a href="#about">Um okkur</a></li>
+    <li><a href="#location">Staðsetning</a></li>
+    <li><a href="#contact">Hafa samband</a></li>
+    <li><a href="#signup">Skráning</a></li>
+  </ul>
+</div>
+
+<!-- Kafli 3: Um okkur -->
 <div id="about" class="section" style="text-align:center;">
   <h2>Um Okkur</h2>
-  <p>Við erum í 10. bekk og höfum áhuga á að kynna verkefni okkar á þessari vefsíðu. Þetta er okkar fyrsta vefsíða og við erum stolt af því að vera hluti af skólakenningunni. Við viljum deila okkar verkefnum og áhugamálum með öllum.</p>
-  <p>Í þessum kafla munum við segja frá okkur, okkar markmiðum, og hvað við höfum lært í ferlinu að skapa þessa síðu. Við vonum að þú njótir þess að skoða það sem við erum að bjóða upp á.</p>
+  <p>Við erum að læra um vefhönnun og forritun. Þetta er okkar fyrsta verkefni og við erum spennt að deila því með ykkur.</p>
 </div>
 
-<!-- Kafli 2: Staðsetning með mynd -->
+<!-- Kafli 4: Staðsetning -->
 <div id="location" class="section" style="text-align:center;">
   <h2>📍 Staðsetning</h2>
-  <p>Við búum í fallegu landi, Ísland, og hér er kort af staðsetningu okkar:</p>
   <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Kort af staðsetningu" />
-  <p>Ef þú vilt koma í heimsókn, vinsamlegast hafðu samband í gegnum netfangið okkar.</p>
+  <p>Við búum í Reykjavík, Ísland. Ef þú vilt hitta okkur, hafðu samband í netfanginu okkar.</p>
 </div>
 
-<!-- Kafli 3: Karfa -->
-<div id="cart" class="section" style="text-align:center;">
-  <h2>Karfan þín er tóm...</h2>
-  <p>Þú hefur ekki bætt neinu við körfuna ennþá. Vinsamlegast skoðaðu vörur okkar og bættu við í körfuna þína.</p>
-  <button class="button" onclick="alert('Karfan er enn tóm!')">Skoða vörur</button>
-</div>
-
-<!-- Kafli 4: Hafa samband -->
+<!-- Kafli 5: Hafa samband -->
 <div id="contact" class="section" style="text-align:center;">
   <h2>Hafa samband</h2>
-  <p>Ef þú hefur spurningar eða vilt koma á framfæri, endilega hafðu samband við okkur:</p>
-  <ul style="list-style:none; padding:0;">
-    <li>Netfang: <a href="mailto:gil10angela@giljaskoli.is">gil10angela@giljaskoli.is</a></li>
-    <li>Símanúmer: 555-1234</li>
-    <li>Heimilisfang: Alþingi 1, Reykjavík</li>
-  </ul>
+  <p>Netfang: <a href="mailto:gil10angela@giljaskoli.is">gil10angela@giljaskoli.is</a></p>
+  <p>Sími: 555-1234</p>
+  <p>Heimilisfang: Alþingi 1, Reykjavík</p>
 </div>
 
-<!-- Kafli 5: Skráning með Gmail -->
+<!-- Kafli 6: Skráning með Gmail -->
 <div id="signup" class="section" style="text-align:center;">
   <h2>Fáðu afslátt</h2>
-  <p>Skráðu þig með Gmail til að fá sérstakan afslátt og tilboð:</p>
+  <p>Skráðu þig með Gmail til að fá sérstakan afslátt:</p>
   <button class="button" onclick="signInWithGmail()">Skrá mig með Gmail</button>
-  <p style="margin-top:20px;">Við munum aldrei deila persónuupplýsingum þínum án samþykkis.</p>
 </div>
 
-<!-- Kafli 6: Fleiri upplýsingar og félagsleg tengsl -->
-<div id="additional-info" class="section" style="text-align:center;">
-  <h2>Fleiri upplýsingar</h2>
-  <p>Við stefnum að því að bæta við fleiri efni í framtíðinni, svo sem myndböndum, verkefnaviðbótum og fleiri gagnlegum upplýsingum.</p>
-  <p>Fylgdu okkur á samfélagsmiðlum:</p>
-  <ul style="list-style:none; padding:0;">
-    <li><a href="#">Facebook</a></li>
-    <li><a href="#">Instagram</a></li>
-    <li><a href="#">Twitter</a></li>
-  </ul>
-</div>
-
-<!-- Kafli 7: Fótur -->
+<!-- Fótur -->
 <div id="footer" class="section" style="text-align:center; background-color:#222; color:#fff; padding:40px;">
   <p>&copy; 2024 Vefsíðan mín. Allur réttur áskilinn.</p>
   <p>Hafðu samband: <a href="mailto:gil10angela@giljaskoli.is" style="color:#fff;">gil10angela@giljaskoli.is</a></p>
 </div>
 
-<!-- JavaScript til að bæta virkni -->
 <script>
   function signInWithGmail() {
     alert("Þetta er einfalt dæmi. Alvöru skráning krefst Google OAuth API.");
