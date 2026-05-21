@@ -3,269 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fóta Gleði</title>
+  <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
     :root {
-      --accent: #D63384;
-      --bg-light: linear-gradient(135deg, #FFB6C1 0%, #FFE4E1 100%);
-      --card-light: #ffffff;
-      --text-light: #333;
+      --pink: #D63384;
+      --light-pink: #FFB6C1;
     }
-    [data-theme="dark"] {
-      --accent: #ff8ab8;
-      --bg-light: linear-gradient(135deg, #1f0d18 0%, #2d1b2b 100%);
-      --card-light: #2a1f2a;
-      --text-light: #f0e0e8;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      min-height: 100vh;
-      transition: all 0.5s ease;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #ffe4e9 0%, #ffd1e0 100%);
+      color: #333;
+      line-height: 1.6;
     }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
 
+    /* Header */
     header {
-      background: var(--card-light);
-      backdrop-filter: blur(12px);
-      padding: 22px 30px;
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      margin: 25px 0 35px;
+      background: white;
+      border-radius: 20px;
+      padding: 20px 30px;
+      margin: 20px 0 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 15px;
     }
-    .logo { width: 100px; height: 100px; object-fit: contain; border-radius: 18px; }
-
-    .controls { display: flex; gap: 12px; align-items: center; }
-    button {
-      padding: 10px 16px;
-      border: 2px solid var(--accent);
-      background: transparent;
-      color: var(--accent);
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    button:hover { transform: translateY(-3px); }
-
-    nav {
-      background: var(--card-light);
-      padding: 18px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    .logo { height: 80px; border-radius: 12px; }
+    .header-right { display: flex; align-items: center; gap: 20px; }
+    .cart { font-size: 2.2rem; cursor: pointer; position: relative; }
+    .cart span {
+      position: absolute;
+      top: -8px; right: -8px;
+      background: var(--pink);
+      color: white;
+      font-size: 0.8rem;
+      width: 22px; height: 22px;
+      border-radius: 50%;
       display: flex;
-      gap: 14px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 15px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: center;
       flex-wrap: wrap;
+      gap: 12px;
       margin-bottom: 40px;
     }
+    nav button {
+      padding: 12px 26px;
+      border: 2px solid var(--light-pink);
+      background: white;
+      color: var(--pink);
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
     nav button.active, nav button:hover {
-      background: var(--accent);
+      background: var(--pink);
       color: white;
-      border-color: var(--accent);
+      transform: translateY(-3px);
     }
 
-    .content { display: none; animation: fadeIn 0.6s ease forwards; }
-    .content.active { display: block; }
-    @keyframes fadeIn { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
-
+    /* Products */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
     }
     .product-card {
-      background: var(--card-light);
-      border-radius: 24px;
+      background: white;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s;
     }
     .product-card:hover {
       transform: translateY(-15px);
-      box-shadow: 0 25px 50px rgba(214, 51, 132, 0.25);
+      box-shadow: 0 20px 40px rgba(214,51,132,0.2);
     }
     .product-image {
       width: 100%;
-      height: 290px;
+      height: 280px;
       object-fit: cover;
-      transition: transform 0.6s ease;
     }
-    .product-card:hover .product-image { transform: scale(1.1); }
-
-    .product-info { padding: 24px; }
-    .product-name { font-size: 1.4em; margin-bottom: 10px; }
-    .product-price { font-size: 1.65em; color: var(--accent); font-weight: 700; margin: 12px 0; }
-
-    .btn-add-cart {
+    .product-info {
+      padding: 20px;
+      text-align: center;
+    }
+    .product-name { font-size: 1.35rem; margin: 10px 0; }
+    .product-price { font-size: 1.6rem; color: var(--pink); font-weight: bold; }
+    .btn {
+      margin-top: 15px;
       width: 100%;
-      padding: 16px;
-      background: var(--accent);
+      padding: 14px;
+      background: var(--pink);
       color: white;
       border: none;
-      border-radius: 14px;
-      font-size: 1.1em;
+      border-radius: 50px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
     }
-    .btn-add-cart:hover { background: #b82e6f; transform: scale(1.03); }
 
-    .modal {
-      display: none; position: fixed; z-index: 1000;
-      left: 0; top: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      align-items: center; justify-content: center;
-    }
-    .modal.active { display: flex; }
-    .modal-content {
-      background: var(--card-light);
-      border-radius: 24px;
-      padding: 35px;
-      max-width: 650px;
-      width: 90%;
+    /* Sections */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      margin-top: 80px;
     }
   </style>
 </head>
 <body>
   <div class="container">
+
     <header>
-      <div style="display:flex; align-items:center; gap:20px;">
+      <div style="display:flex; align-items:center; gap:15px;">
         <img src="Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo">
         <div>
-          <h1 id="siteTitle" style="font-size:2.6em; color:var(--accent);">Fóta Gleði</h1>
-          <p id="tagline">Sokkar og Inniskór fyrir alla!</p>
+          <h1 style="color:var(--pink); font-size:2.8rem;">Fóta Gleði</h1>
+          <p style="font-size:1.2rem;">Sokkar og Inniskór fyrir alla!</p>
         </div>
       </div>
-      
-      <div class="controls">
-        <button onclick="toggleLanguage()">🇮🇸 / 🇬🇧</button>
-        <button onclick="toggleTheme()" id="themeBtn">🌙</button>
+      <div class="header-right">
+        <div class="cart" onclick="showSection('cart')">🛒 <span id="cart-count">0</span></div>
       </div>
     </header>
 
     <nav>
-      <button class="active" onclick="showSection('products')" id="nav1">Vörur</button>
-      <button onclick="showSection('about')" id="nav2">Um Okkur</button>
-      <button onclick="showSection('cart')" id="nav3">Karfan</button>
-      <button onclick="showSection('contact')" id="nav4">Hafa Samband</button>
-      <button onclick="showSection('location')" id="nav5">Staðsetning</button>
+      <button class="active" onclick="showSection('products')">Vörur</button>
+      <button onclick="showSection('about')">Um Okkur</button>
+      <button onclick="showSection('contact')">Hafa Samband</button>
+      <button onclick="showSection('location')">Staðsetning</button>
     </nav>
 
-    <div id="products" class="content active">
-      <div class="products-grid" id="productsGrid"></div>
+    <!-- Vörur -->
+    <div id="products" class="section active">
+      <div class="products-grid" id="product-grid"></div>
     </div>
 
-    <div id="about" class="content">
-      <div style="background:var(--card-light); padding:40px; border-radius:24px; box-shadow:0 10px 35px rgba(0,0,0,0.1);">
-        <h2 id="aboutTitle" style="color:var(--accent);">Um Okkur</h2>
-        <p id="aboutText" style="margin-top:20px; font-size:1.1em; line-height:1.8;"></p>
-      </div>
+    <!-- Um Okkur -->
+    <div id="about" class="section">
+      <h2 style="text-align:center; color:var(--pink); margin:40px 0 20px;">Um Okkur</h2>
+      <p style="max-width:800px; margin:0 auto; font-size:1.15rem; text-align:center;">
+        Við erum í 10. bekk og ákváðum að byrja okkar eigið sokka fyrirtæki.<br>
+        Alexandra, Angela, Ída, María og Gunnar hafa sameinað krafta sína til að gera drauminn að veruleika.
+      </p>
     </div>
 
-    <div id="cart" class="content"><h2 style="text-align:center;margin-top:80px;">Karfan þín er tóm 🛒</h2></div>
-    <div id="contact" class="content"><h2 style="text-align:center;margin-top:80px;">Hafa Samband</h2></div>
-    <div id="location" class="content"><h2 style="text-align:center;margin-top:80px;">Staðsetning</h2></div>
+    <!-- Karfa, Hafa samband, Staðsetning -->
+    <div id="cart" class="section"><h2 style="text-align:center; margin-top:100px;">Karfan þín er tóm...</h2></div>
+    <div id="contact" class="section"><h2 style="text-align:center; margin-top:100px;">Hafa Samband - Form kemur fljótlega</h2></div>
+    <div id="location" class="section"><h2 style="text-align:center; margin-top:100px;">Glerágata 8, Akureyri</h2></div>
+
   </div>
 
+  <footer>
+    © 2026 Fóta Gleði • Handsmíðað af nemendum í 10. bekk
+  </footer>
+
   <script>
-    let currentLang = "is";
-
-    const translations = {
-      is: {
-        title: "Fóta Gleði",
-        tagline: "Sokkar og Inniskór fyrir alla!",
-        products: "Vörur",
-        about: "Um Okkur",
-        cart: "Karfan",
-        contact: "Hafa Samband",
-        location: "Staðsetning",
-        aboutText: "Við erum í 10. bekk og ákváðum að byrja okkar eigið sokka fyrirtæki. Alexandra, Angela, Ída, María og Gunnar."
-      },
-      en: {
-        title: "Fóta Gleði",
-        tagline: "Socks & Slippers for Everyone!",
-        products: "Products",
-        about: "About Us",
-        cart: "Cart",
-        contact: "Contact",
-        location: "Location",
-        aboutText: "We are 10th graders who decided to start our own sock company. Alexandra, Angela, Ída, María and Gunnar."
-      }
-    };
-
     const products = [
-      {id:1, name_is:"Funny Scream Socks", name_en:"Funny Scream Socks", price:2290, img:"images/Funny-Socks-Scream-Art.webp", desc_is:"Sokkar sem láta þig skrika af gleði!", desc_en:"Socks that make you scream with joy!"},
-      {id:2, name_is:"Music Lovers Socks", name_en:"Music Lovers Socks", price:1990, img:"images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc_is:"Fyrir tónlistarunnendur", desc_en:"Perfect for music lovers"},
-      {id:3, name_is:"Grey Alba Mule Slippers", name_en:"Grey Alba Mule Slippers", price:3490, img:"images/grey-alba-mule-slippers-lotus-p144.webp", desc_is:"Þægilegir gráir inniskór", desc_en:"Super comfortable grey slippers"}
+      {id:1, name:"Funny Scream Socks", price:2290, img:"images/Funny-Socks-Scream-Art.webp"},
+      {id:2, name:"Music Lovers Socks", price:1990, img:"images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp"},
+      {id:3, name:"Grey Alba Mule Slippers", price:3490, img:"images/grey-alba-mule-slippers-lotus-p144.webp"}
     ];
 
-    function toggleLanguage() {
-      currentLang = currentLang === "is" ? "en" : "is";
-      updateTexts();
-      renderProducts();
-    }
-
-    function updateTexts() {
-      const t = translations[currentLang];
-      document.getElementById("siteTitle").textContent = t.title;
-      document.getElementById("tagline").textContent = t.tagline;
-      document.getElementById("nav1").textContent = t.products;
-      document.getElementById("nav2").textContent = t.about;
-      document.getElementById("nav3").textContent = t.cart;
-      document.getElementById("nav4").textContent = t.contact;
-      document.getElementById("nav5").textContent = t.location;
-      document.getElementById("aboutText").textContent = t.aboutText;
-    }
-
-    function toggleTheme() {
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      document.documentElement.setAttribute("data-theme", isDark ? "" : "dark");
-      document.getElementById("themeBtn").textContent = isDark ? "🌙" : "☀️";
-    }
-
     function renderProducts() {
-      const grid = document.getElementById("productsGrid");
+      const grid = document.getElementById("product-grid");
       grid.innerHTML = "";
-      products.forEach(p => {
+      products.forEach(product => {
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-          <img src="${p.img}" class="product-image" alt="${p.name_is}">
+          <img src="${product.img}" class="product-image" alt="${product.name}">
           <div class="product-info">
-            <h3 class="product-name">${currentLang === "is" ? p.name_is : p.name_en}</h3>
-            <p>${currentLang === "is" ? p.desc_is : p.desc_en}</p>
-            <p class="product-price">${p.price.toLocaleString("is-IS")} kr.</p>
-            <button class="btn-add-cart" onclick="addToCart(${p.id})">
-              ${currentLang === "is" ? "Bæta í körfu" : "Add to Cart"}
-            </button>
+            <h3 class="product-name">${product.name}</h3>
+            <p class="product-price">${product.price.toLocaleString('is-IS')} kr</p>
+            <button class="btn" onclick="addToCart(${product.id})">Bæta í körfu</button>
           </div>
         `;
         grid.appendChild(card);
       });
     }
 
+    let cartCount = 0;
     function addToCart(id) {
-      alert(currentLang === "is" ? "✅ Vara bætt í körfu!" : "✅ Added to cart!");
+      cartCount++;
+      document.getElementById("cart-count").textContent = cartCount;
+      alert("✅ Vara bætt í körfu!");
     }
 
-    function showSection(id) {
-      document.querySelectorAll(".content").forEach(c => c.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      
+      document.querySelectorAll('nav button').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(sectionId));
+      });
     }
 
     // Initialize
-    window.onload = () => {
-      renderProducts();
-      updateTexts();
-    };
+    window.onload = renderProducts;
   </script>
 </body>
 </html>
