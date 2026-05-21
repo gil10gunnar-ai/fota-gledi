@@ -5,147 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
-    :root {
-      --pink: #D63384;
-      --light-pink: #FFB6C1;
-    }
+    :root { --pink: #D63384; --light: #FFB6C1; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(135deg, #ffe4e9 0%, #ffd1e0 100%);
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
       color: #333;
-      line-height: 1.6;
     }
-    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
 
-    /* Header */
     header {
       background: white;
-      border-radius: 20px;
-      padding: 20px 30px;
-      margin: 20px 0 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 24px;
+      padding: 25px 35px;
+      margin: 25px 0 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
     }
-    .logo { height: 80px; border-radius: 12px; }
-    .header-right { display: flex; align-items: center; gap: 20px; }
-    .cart { font-size: 2.2rem; cursor: pointer; position: relative; }
-    .cart span {
+    .logo { height: 100px; border-radius: 16px; }
+
+    .cart-icon {
+      font-size: 2.8rem;
+      cursor: pointer;
+      position: relative;
+    }
+    .cart-count {
       position: absolute;
-      top: -8px; right: -8px;
+      top: -10px; right: -10px;
       background: var(--pink);
       color: white;
-      font-size: 0.8rem;
-      width: 22px; height: 22px;
+      width: 28px; height: 28px;
       border-radius: 50%;
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: bold;
     }
 
-    /* Navigation */
     nav {
       background: white;
-      padding: 15px;
-      border-radius: 16px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      padding: 18px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 40px;
+      gap: 15px;
+      margin-bottom: 45px;
     }
     nav button {
-      padding: 12px 26px;
-      border: 2px solid var(--light-pink);
+      padding: 14px 28px;
+      border: 2px solid var(--light);
       background: white;
       color: var(--pink);
       border-radius: 50px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: 0.4s;
     }
     nav button.active, nav button:hover {
       background: var(--pink);
       color: white;
-      transform: translateY(-3px);
+      transform: translateY(-4px);
     }
 
-    /* Products */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 30px;
     }
     .product-card {
       background: white;
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      transition: all 0.4s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transition: all 0.5s;
     }
     .product-card:hover {
       transform: translateY(-15px);
-      box-shadow: 0 20px 40px rgba(214,51,132,0.2);
+      box-shadow: 0 25px 50px rgba(214,51,132,0.25);
     }
     .product-image {
       width: 100%;
-      height: 280px;
+      height: 310px;
       object-fit: cover;
     }
-    .product-info {
-      padding: 20px;
-      text-align: center;
-    }
-    .product-name { font-size: 1.35rem; margin: 10px 0; }
-    .product-price { font-size: 1.6rem; color: var(--pink); font-weight: bold; }
-    .btn {
-      margin-top: 15px;
+    .product-info { padding: 24px; text-align: center; }
+    .product-name { font-size: 1.4rem; margin: 12px 0 6px; font-weight: 600; }
+    .product-price { font-size: 1.7rem; color: var(--pink); font-weight: 700; }
+    .btn-add {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       background: var(--pink);
       color: white;
       border: none;
       border-radius: 50px;
-      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 12px;
       cursor: pointer;
     }
-
-    /* Sections */
-    .section { display: none; }
-    .section.active { display: block; }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      color: #666;
-      margin-top: 80px;
-    }
+    .btn-add:hover { background: #b82e6f; }
   </style>
 </head>
 <body>
   <div class="container">
 
     <header>
-      <div style="display:flex; align-items:center; gap:15px;">
+      <div style="display:flex; align-items:center; gap:20px;">
         <img src="Screenshot 2026-05-20 11.54.56.png" alt="Logo" class="logo">
         <div>
-          <h1 style="color:var(--pink); font-size:2.8rem;">Fóta Gleði</h1>
-          <p style="font-size:1.2rem;">Sokkar og Inniskór fyrir alla!</p>
+          <h1 style="font-size: 3.2rem; color: var(--pink);">Fóta Gleði</h1>
+          <p style="font-size: 1.35rem;">Sokkar og Inniskór fyrir alla!</p>
         </div>
       </div>
-      <div class="header-right">
-        <div class="cart" onclick="showSection('cart')">🛒 <span id="cart-count">0</span></div>
-      </div>
+      <div class="cart-icon" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
     </header>
 
     <nav>
       <button class="active" onclick="showSection('products')">Vörur</button>
       <button onclick="showSection('about')">Um Okkur</button>
+      <button onclick="showSection('cart')">Karfan</button>
       <button onclick="showSection('contact')">Hafa Samband</button>
       <button onclick="showSection('location')">Staðsetning</button>
     </nav>
@@ -155,45 +139,76 @@
       <div class="products-grid" id="product-grid"></div>
     </div>
 
-    <!-- Um Okkur -->
-    <div id="about" class="section">
-      <h2 style="text-align:center; color:var(--pink); margin:40px 0 20px;">Um Okkur</h2>
-      <p style="max-width:800px; margin:0 auto; font-size:1.15rem; text-align:center;">
-        Við erum í 10. bekk og ákváðum að byrja okkar eigið sokka fyrirtæki.<br>
-        Alexandra, Angela, Ída, María og Gunnar hafa sameinað krafta sína til að gera drauminn að veruleika.
+    <div id="about" class="section" style="display:none; padding:50px 20px; text-align:center;">
+      <h2 style="color:var(--pink); margin-bottom:20px;">Um Okkur</h2>
+      <p style="max-width:800px; margin:0 auto; font-size:1.15rem;">
+        Við erum í 10. bekk og ákváðum að byrja okkar eigið fyrirtæki.<br>
+        Alexandra, Angela, Ída, María og Gunnar.
       </p>
     </div>
 
-    <!-- Karfa, Hafa samband, Staðsetning -->
-    <div id="cart" class="section"><h2 style="text-align:center; margin-top:100px;">Karfan þín er tóm...</h2></div>
-    <div id="contact" class="section"><h2 style="text-align:center; margin-top:100px;">Hafa Samband - Form kemur fljótlega</h2></div>
-    <div id="location" class="section"><h2 style="text-align:center; margin-top:100px;">Glerágata 8, Akureyri</h2></div>
+    <div id="cart" class="section" style="display:none; text-align:center; padding:100px 20px;">
+      <h2>Karfan þín er tóm...</h2>
+    </div>
+
+    <div id="contact" class="section" style="display:none; text-align:center; padding:100px 20px;">
+      <h2>Hafa Samband</h2>
+    </div>
+
+    <div id="location" class="section" style="display:none; text-align:center; padding:100px 20px;">
+      <h2>📍 Glerágata 8, Akureyri</h2>
+    </div>
 
   </div>
 
-  <footer>
-    © 2026 Fóta Gleði • Handsmíðað af nemendum í 10. bekk
-  </footer>
-
   <script>
     const products = [
-      {id:1, name:"Funny Scream Socks", price:2290, img:"images/Funny-Socks-Scream-Art.webp"},
-      {id:2, name:"Music Lovers Socks", price:1990, img:"images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp"},
-      {id:3, name:"Grey Alba Mule Slippers", price:3490, img:"images/grey-alba-mule-slippers-lotus-p144.webp"}
+      {
+        name: "Funny Scream Socks",
+        price: 2290,
+        img: "Funny-Socks-Scream-Art.webp",
+        desc: "Fyndnir sokkar sem láta þig skrika af gleði"
+      },
+      {
+        name: "Music Lovers Socks",
+        price: 2190,
+        img: "Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp",
+        desc: "Sokkar fyrir tónlistarunnendur"
+      },
+      {
+        name: "Cozy Black Slippers",
+        price: 3490,
+        img: "Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp",
+        desc: "Mjúkir svartir inniskór"
+      },
+      {
+        name: "Fótakrem í Túbu",
+        price: 4000,
+        img: "Screenshot 2026-05-21 8.50.51 AM.png",
+        desc: "Næringarríkt fótakrem"
+      },
+      {
+        name: "Fótakrem í Dós",
+        price: 6000,
+        img: "Screenshot 2026-05-21 8.51.00 AM.png",
+        desc: "Stór og hagkvæmur pakki"
+      }
     ];
 
     function renderProducts() {
       const grid = document.getElementById("product-grid");
       grid.innerHTML = "";
-      products.forEach(product => {
+
+      products.forEach(p => {
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-          <img src="${product.img}" class="product-image" alt="${product.name}">
+          <img src="${p.img}" class="product-image" alt="${p.name}">
           <div class="product-info">
-            <h3 class="product-name">${product.name}</h3>
-            <p class="product-price">${product.price.toLocaleString('is-IS')} kr</p>
-            <button class="btn" onclick="addToCart(${product.id})">Bæta í körfu</button>
+            <h3 class="product-name">${p.name}</h3>
+            <p>${p.desc}</p>
+            <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
+            <button class="btn-add" onclick="addToCart('${p.name}')">Bæta í körfu</button>
           </div>
         `;
         grid.appendChild(card);
@@ -201,22 +216,17 @@
     }
 
     let cartCount = 0;
-    function addToCart(id) {
+    function addToCart(name) {
       cartCount++;
       document.getElementById("cart-count").textContent = cartCount;
-      alert("✅ Vara bætt í körfu!");
+      alert(`✅ ${name} bætt í körfu!`);
     }
 
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-      
-      document.querySelectorAll('nav button').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('onclick').includes(sectionId));
-      });
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
     }
 
-    // Initialize
     window.onload = renderProducts;
   </script>
 </body>
