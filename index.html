@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fóta Gleði - Sokkar & Inniskór</title>
   <style>
-    :root { --pink: #D63384; }
+    :root { --pink: #D63384; --lightpink: #FFB6C1; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: system-ui, sans-serif;
       background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
       color: #333;
     }
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1450px; margin: 0 auto; padding: 0 20px; }
 
     header {
       background: white;
@@ -50,7 +50,7 @@
     }
     nav button {
       padding: 14px 28px;
-      border: 2px solid #FFB6C1;
+      border: 2px solid var(--lightpink);
       background: white;
       color: var(--pink);
       border-radius: 50px;
@@ -144,7 +144,7 @@
     <div id="location" class="section">
       <h2 style="text-align:center; color:var(--pink); margin:40px 0 20px;">📍 Staðsetning okkar</h2>
       <p style="text-align:center; font-size:1.3rem;"><strong>Glerágata 8, Akureyri</strong></p>
-      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Verslun" class="location-img">
+      <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Staðsetning" class="location-img">
     </div>
 
     <!-- Hafa Samband -->
@@ -155,11 +155,11 @@
 
   <script>
     const products = [
-      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar" },
-      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Tónlistarsokkar" },
+      { name: "Funny Scream Socks", price: 2290, img: "images/Funny-Socks-Scream-Art.webp", desc: "Fyndnir sokkar sem láta þig skrika af gleði" },
+      { name: "Music Lovers Socks", price: 2190, img: "images/Music-Lovers-Socks-David-Toewie_480x_2x_f64a7d83-a41a-4057-b9cf-3e82cec7df98_1024x1024.webp", desc: "Sokkar fyrir tónlistarunnendur" },
       { name: "Cozy Black Slippers", price: 3490, img: "images/Hush_Pajamas_1320_471c6d21-2391-4dad-896c-7adbe3e8a387.webp", desc: "Mjúkir svartir inniskór" },
-      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Fótakrem" },
-      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
+      { name: "Fótakrem í Túbu", price: 4000, img: "images/Screenshot 2026-05-21 8.50.51 AM.png", desc: "Næringarríkt fótakrem" },
+      { name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór hagkvæmur pakki" }
     ];
 
     function renderProducts() {
