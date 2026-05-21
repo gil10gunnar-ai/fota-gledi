@@ -7,70 +7,70 @@
   <style>
     :root {
       --pink: #d63384;
-      --light-pink: #ffe4e9;
-      --shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+      --bg1: #ffe4e9;
+      --bg2: #ffd1e0;
+      --card: #ffffff;
+      --text: #2e2e2e;
+      --shadow: 0 14px 35px rgba(0,0,0,0.12);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
-      color: #333;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
       min-height: 100vh;
     }
 
     .container {
-      max-width: 1450px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 18px;
     }
 
     header {
-      background: white;
-      border-radius: 24px;
-      padding: 25px 35px;
-      margin: 10px 0 25px;
+      background: var(--card);
+      border-radius: 26px;
       box-shadow: var(--shadow);
+      padding: 22px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
       flex-wrap: wrap;
     }
 
     .logo {
-      height: 110px;
-      width: 110px;
+      width: 96px;
+      height: 96px;
       object-fit: cover;
       border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+      background: #f4f4f4;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: clamp(2rem, 5vw, 3.4rem);
       color: var(--pink);
       line-height: 1;
+      margin-bottom: 6px;
     }
 
     .subtitle {
-      font-size: 1.2rem;
-      margin-top: 8px;
+      font-size: 1.1rem;
     }
 
     .cart-icon {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       cursor: pointer;
       position: relative;
       user-select: none;
@@ -78,90 +78,79 @@
 
     .cart-count {
       position: absolute;
-      top: -10px;
+      top: -8px;
       right: -10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
       background: var(--pink);
       color: white;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 0.95rem;
+      font-size: .9rem;
+      font-weight: 800;
     }
 
     nav {
-      background: white;
-      padding: 18px;
-      border-radius: 20px;
+      background: var(--card);
+      border-radius: 22px;
       box-shadow: var(--shadow);
+      padding: 14px;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 35px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
     }
 
     nav button {
-      padding: 14px 26px;
       border: 2px solid #ffb6c1;
       background: white;
       color: var(--pink);
+      padding: 12px 22px;
       border-radius: 999px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
-      transition: 0.25s ease;
+      transition: .2s ease;
     }
 
-    nav button.active,
-    nav button:hover {
+    nav button:hover,
+    nav button.active {
       background: var(--pink);
       color: white;
       transform: translateY(-2px);
     }
 
-    .section {
-      display: none;
-      animation: fadeIn 0.25s ease;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .section { display: none; }
+    .section.active { display: block; }
 
     .hero {
       background: white;
-      border-radius: 24px;
+      border-radius: 26px;
       box-shadow: var(--shadow);
       padding: 28px;
-      margin-bottom: 30px;
       text-align: center;
+      margin-bottom: 24px;
     }
 
     .hero h2 {
       color: var(--pink);
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 4vw, 2.3rem);
       margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 1.05rem;
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 1.05rem;
     }
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
 
     .product-card {
@@ -169,31 +158,30 @@
       border-radius: 24px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
 
     .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 45px rgba(214, 51, 132, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 44px rgba(214,51,132,0.20);
     }
 
     .product-image {
       width: 100%;
-      height: 320px;
+      height: 300px;
       object-fit: cover;
       display: block;
-      background: #f6f6f6;
+      background: #f5f5f5;
     }
 
     .product-info {
-      padding: 22px;
+      padding: 20px;
       text-align: center;
     }
 
     .product-name {
-      font-size: 1.35rem;
-      margin: 8px 0;
-      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
     }
 
     .product-desc {
@@ -202,58 +190,55 @@
     }
 
     .product-price {
-      font-size: 1.6rem;
       color: var(--pink);
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 900;
       margin-bottom: 14px;
     }
 
     .btn-add {
       width: 100%;
+      border: none;
       padding: 14px;
+      border-radius: 999px;
       background: var(--pink);
       color: white;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 700;
       font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
     }
 
-    .btn-add:hover {
-      filter: brightness(0.95);
-    }
-
-    .about-box,
-    .cart-box,
-    .contact-box,
-    .location-box {
+    .panel {
       background: white;
-      border-radius: 24px;
+      border-radius: 26px;
       box-shadow: var(--shadow);
-      padding: 35px;
+      padding: 30px;
       text-align: center;
     }
 
-    .about-box h2,
-    .cart-box h2,
-    .contact-box h2,
-    .location-box h2 {
+    .panel h2 {
       color: var(--pink);
       font-size: 2rem;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+    }
+
+    .about-text {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
     }
 
     .cart-items {
       display: grid;
-      gap: 18px;
-      margin-top: 25px;
+      gap: 16px;
+      margin-top: 20px;
       text-align: left;
     }
 
     .cart-item {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       align-items: center;
       background: #fff7fa;
       border-radius: 18px;
@@ -261,24 +246,14 @@
     }
 
     .cart-item img {
-      width: 90px;
-      height: 90px;
+      width: 84px;
+      height: 84px;
       object-fit: cover;
       border-radius: 14px;
       flex-shrink: 0;
     }
 
-    .cart-item-info {
-      flex: 1;
-    }
-
-    .cart-item-info h3 {
-      margin-bottom: 6px;
-    }
-
-    .cart-item-info p {
-      margin-bottom: 4px;
-    }
+    .cart-item-info { flex: 1; }
 
     .remove-btn {
       border: none;
@@ -286,35 +261,28 @@
       color: white;
       padding: 10px 14px;
       border-radius: 999px;
+      font-weight: 800;
       cursor: pointer;
-      font-weight: 700;
     }
 
-    .total-box {
-      margin-top: 25px;
-      font-size: 1.4rem;
-      font-weight: 800;
+    .total {
+      margin-top: 22px;
+      font-size: 1.35rem;
+      font-weight: 900;
       color: var(--pink);
     }
 
+    .location-img {
+      max-width: 100%;
+      border-radius: 22px;
+      margin-top: 18px;
+      box-shadow: var(--shadow);
+    }
+
     @media (max-width: 700px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      .logo {
-        width: 85px;
-        height: 85px;
-      }
-
-      .product-image {
-        height: 260px;
-      }
-
-      .cart-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .logo { width: 78px; height: 78px; }
+      .cart-item { flex-direction: column; align-items: flex-start; }
+      .product-image { height: 250px; }
     }
   </style>
 </head>
@@ -328,10 +296,7 @@
           <p class="subtitle">Sokkar og Inniskór fyrir alla!</p>
         </div>
       </div>
-
-      <div class="cart-icon" onclick="showSection('cart')">
-        🛒 <span class="cart-count" id="cart-count">0</span>
-      </div>
+      <div class="cart-icon" onclick="showSection('cart')">🛒 <span class="cart-count" id="cart-count">0</span></div>
     </header>
 
     <nav>
@@ -345,37 +310,37 @@
     <div id="products" class="section active">
       <div class="hero">
         <h2>Velkomin í Fóta Gleði</h2>
-        <p>Hér finnur þú skemmtilega sokka, hlýja inniskó og vörur sem gera daginn aðeins skemmtilegri.</p>
+        <p>Við seljum skemmtilega sokka og mjúka inniskó. Markmiðið okkar er að búa til vörur sem eru bæði flottar og þægilegar.</p>
       </div>
       <div class="products-grid" id="product-grid"></div>
     </div>
 
     <div id="about" class="section">
-      <div class="about-box">
+      <div class="panel">
         <h2>Um Okkur</h2>
-        <p>Við erum nokkrir nemendur úr 10 bekk Giljaskóla og við ákváðum að byrja sokka fyrirtæki.</p>
+        <p class="about-text">Við erum nokkrir nemendur úr 10 bekk Giljaskóla og við ákváðum að byrja sokka fyrirtæki.</p>
       </div>
     </div>
 
     <div id="cart" class="section">
-      <div class="cart-box">
+      <div class="panel">
         <h2>Karfan þín</h2>
         <div id="cart-items" class="cart-items"></div>
-        <div class="total-box" id="cart-total">Samtals: 0 kr.</div>
+        <div id="cart-total" class="total">Samtals: 0 kr.</div>
       </div>
     </div>
 
     <div id="contact" class="section">
-      <div class="contact-box">
+      <div class="panel">
         <h2>Hafa Samband</h2>
-        <p>Settu inn netfang, símanúmer eða Instagram hér ef þið viljið hafa samband.</p>
+        <p>Settu inn símanúmer, netfang eða Instagram hér.</p>
       </div>
     </div>
 
     <div id="location" class="section">
-      <div class="location-box">
+      <div class="panel">
         <h2>📍 Staðsetning</h2>
-        <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Staðsetning" style="max-width:100%; border-radius:20px; margin-top:20px;">
+        <img src="images/Screenshot 2026-05-21 9.02.07 AM.png" alt="Staðsetning" class="location-img">
       </div>
     </div>
   </div>
@@ -418,7 +383,6 @@
     function addToCart(id) {
       const product = products.find(p => p.id === id);
       if (!product) return;
-
       cart.push(product);
       saveCart();
       updateCartCount();
@@ -441,8 +405,6 @@
       const cartItems = document.getElementById("cart-items");
       const cartTotal = document.getElementById("cart-total");
 
-      if (!cartItems) return;
-
       if (cart.length === 0) {
         cartItems.innerHTML = "<p style='text-align:center; width:100%;'>Karfan er tóm.</p>";
         cartTotal.textContent = "Samtals: 0 kr.";
@@ -450,7 +412,6 @@
       }
 
       let total = 0;
-
       cartItems.innerHTML = cart.map((item, index) => {
         total += item.price;
         return `
@@ -472,22 +433,10 @@
     function showSection(id) {
       document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
       document.getElementById(id).classList.add("active");
-
       document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
-      const buttons = [...document.querySelectorAll("nav button")];
-      const map = {
-        products: 0,
-        about: 1,
-        cart: 2,
-        contact: 3,
-        location: 4
-      };
-      if (map[id] !== undefined) buttons[map[id]].classList.add("active");
-
-      if (id === "cart") renderCart();
     }
 
-    window.onload = function () {
+    window.onload = function() {
       renderProducts();
       updateCartCount();
       renderCart();
