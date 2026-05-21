@@ -5,77 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fóta Gleði</title>
   <style>
-    :root {
-      --pink: #d63384;
-      --bg: #ffd9e5;
-      --card: white;
-      --shadow: 0 10px 30px rgba(0,0,0,0.12);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, #ffe4eb, #ffd1e0);
+      background: linear-gradient(135deg, #ffe4e9, #ffd1e0);
       color: #222;
     }
-
     .container {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 18px;
+      padding: 20px;
     }
-
+    header, nav, .panel, .product-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
     header {
-      background: var(--card);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 20px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 20px;
+      margin-bottom: 18px;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 18px;
     }
-
     .brand {
       display: flex;
       align-items: center;
       gap: 16px;
       flex-wrap: wrap;
     }
-
     .logo {
-      width: 90px;
-      height: 90px;
+      width: 85px;
+      height: 85px;
       object-fit: cover;
       border-radius: 16px;
       background: #f4f4f4;
     }
-
-    h1 {
-      font-size: 2.8rem;
-      color: var(--pink);
-      line-height: 1;
-    }
-
-    .subtitle {
-      margin-top: 6px;
-      font-size: 1.05rem;
-    }
-
+    h1 { color: #d63384; font-size: 2.6rem; line-height: 1; }
+    .subtitle { margin-top: 5px; }
     .cart-btn {
-      font-size: 2.3rem;
-      cursor: pointer;
+      font-size: 2.2rem;
       position: relative;
+      cursor: pointer;
       user-select: none;
     }
-
     .cart-count {
       position: absolute;
       top: -8px;
@@ -83,7 +58,7 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: var(--pink);
+      background: #d63384;
       color: white;
       display: flex;
       align-items: center;
@@ -91,11 +66,7 @@
       font-size: 0.85rem;
       font-weight: 800;
     }
-
     nav {
-      background: var(--card);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
       padding: 14px;
       display: flex;
       gap: 10px;
@@ -103,64 +74,45 @@
       justify-content: center;
       margin-bottom: 22px;
     }
-
     nav button {
       border: 2px solid #ffb6c1;
       background: white;
-      color: var(--pink);
+      color: #d63384;
       padding: 12px 18px;
       border-radius: 999px;
       font-weight: 700;
       cursor: pointer;
     }
-
     nav button.active,
     nav button:hover {
-      background: var(--pink);
+      background: #d63384;
       color: white;
     }
-
     .section { display: none; }
     .section.active { display: block; }
-
     .hero, .panel {
-      background: var(--card);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
       padding: 24px;
     }
-
     .hero {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       text-align: center;
       margin-bottom: 22px;
     }
-
-    .hero h2,
-    .panel h2 {
-      color: var(--pink);
+    .hero h2, .panel h2 {
+      color: #d63384;
       margin-bottom: 12px;
       font-size: 2rem;
     }
-
-    .hero p,
-    .panel p {
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 22px;
     }
-
     .product-card {
-      background: white;
-      border-radius: 22px;
       overflow: hidden;
-      box-shadow: var(--shadow);
     }
-
     .product-image {
       width: 100%;
       height: 300px;
@@ -168,96 +120,77 @@
       display: block;
       background: #f5f5f5;
     }
-
     .product-info {
       padding: 18px;
       text-align: center;
     }
-
-    .product-name {
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-    }
-
-    .product-desc {
-      color: #666;
-      margin-bottom: 10px;
-    }
-
     .product-price {
-      color: var(--pink);
+      color: #d63384;
       font-size: 1.4rem;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin: 10px 0 12px;
     }
-
+    .btn-add, .remove-btn {
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
     .btn-add {
       width: 100%;
-      border: none;
-      background: var(--pink);
+      background: #d63384;
       color: white;
       padding: 13px;
-      border-radius: 999px;
-      font-weight: 800;
-      cursor: pointer;
     }
-
     .cart-items {
       display: grid;
       gap: 14px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
-
     .cart-item {
       display: flex;
       gap: 14px;
       align-items: center;
       background: #fff7fa;
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 14px;
     }
-
     .cart-item img {
-      width: 84px;
-      height: 84px;
+      width: 80px;
+      height: 80px;
       object-fit: cover;
-      border-radius: 14px;
+      border-radius: 12px;
     }
-
     .cart-item-info {
       flex: 1;
       text-align: left;
     }
-
     .remove-btn {
-      border: none;
       background: #ff5c8a;
       color: white;
       padding: 10px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 700;
     }
-
     .total {
       margin-top: 18px;
-      color: var(--pink);
-      font-size: 1.3rem;
+      color: #d63384;
+      font-size: 1.25rem;
       font-weight: 900;
     }
-
+    .panel p {
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
     .location-img {
       width: 100%;
       max-width: 850px;
       border-radius: 18px;
       margin-top: 18px;
-      box-shadow: var(--shadow);
+      display: block;
     }
-
     @media (max-width: 700px) {
       h1 { font-size: 2rem; }
-      .logo { width: 74px; height: 74px; }
-      .product-image { height: 250px; }
+      .logo { width: 72px; height: 72px; }
+      .product-image { height: 240px; }
       .cart-item { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -285,7 +218,7 @@
     <div id="products" class="section active">
       <div class="hero">
         <h2>Velkomin í Fóta Gleði</h2>
-        <p>Skemmtilegir sokkar, mjúkir inniskór og vörur sem gera daginn betri.</p>
+        <p>Hér eru sokkar og inniskór sem við höfum valið fyrir skemmtilegt og fallegt útlit.</p>
       </div>
       <div class="products-grid" id="product-grid"></div>
     </div>
@@ -322,11 +255,7 @@
       { id: 5, name: "Fótakrem í Dós", price: 6000, img: "images/Screenshot 2026-05-21 8.51.00 AM.png", desc: "Stór pakki" }
     ];
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function saveCart() {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+    let cart = [];
 
     function renderProducts() {
       const grid = document.getElementById("product-grid");
@@ -337,8 +266,8 @@
         card.innerHTML = `
           <img src="${p.img}" alt="${p.name}" class="product-image">
           <div class="product-info">
-            <h3 class="product-name">${p.name}</h3>
-            <p class="product-desc">${p.desc}</p>
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
             <p class="product-price">${p.price.toLocaleString('is-IS')} kr.</p>
             <button class="btn-add" onclick="addToCart(${p.id})">Bæta í körfu</button>
           </div>
@@ -349,25 +278,19 @@
 
     function addToCart(id) {
       const product = products.find(p => p.id === id);
+      if (!product) return;
       cart.push(product);
-      saveCart();
-      updateCartCount();
-      renderCart();
+      updateCart();
       showSection('cart');
     }
 
     function removeFromCart(index) {
       cart.splice(index, 1);
-      saveCart();
-      updateCartCount();
-      renderCart();
+      updateCart();
     }
 
-    function updateCartCount() {
+    function updateCart() {
       document.getElementById("cart-count").textContent = cart.length;
-    }
-
-    function renderCart() {
       const cartItems = document.getElementById("cart-items");
       const cartTotal = document.getElementById("cart-total");
 
@@ -402,10 +325,9 @@
       document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
     }
 
-    window.onload = function() {
+    window.onload = function () {
       renderProducts();
-      updateCartCount();
-      renderCart();
+      updateCart();
     };
   </script>
 </body>
